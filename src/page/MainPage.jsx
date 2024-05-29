@@ -1,5 +1,12 @@
+import React from "react";
+import MainContainer from "../components/MainPage/MainContainer";
+
 const MainPage = () => {
-  return <p>메인 페이지</p>;
+  return (
+    <div>
+      <MainContainer />
+    </div>
+  );
 };
 
 export default MainPage;

@@ -1,14 +1,17 @@
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import useCurrentLocation from "../../hooks/useCurrentLocation";
 import Map from "./Map";
 import SearchContainer from "./SearchContainer";
 import ResetLocation from "./ResetLoctaion";
 import ParkingTicket from "./ParkingTicket";
-import { useRef } from "react";
+import TicketContainer from "./TicketContainer";
 
 const MainContainer = () => {
   const { location, error } = useCurrentLocation();
   const mapRef = useRef(null);
+  const [isTicketVisible, setTicketVisible] = useState(false);
+
   const locations = [
     { latitude: location?.latitude, longitude: location?.longitude },
     {
@@ -20,12 +23,17 @@ const MainContainer = () => {
       longitude: location?.longitude - 0.003,
     },
   ];
+
   const handlerLocation = () => {
     if (mapRef.current && location) {
       mapRef.current.setCenter(
         new window.naver.maps.LatLng(location.latitude, location.longitude)
       );
     }
+  };
+
+  const toggleTicketContainer = () => {
+    setTicketVisible((prev) => !prev);
   };
 
   if (!location) {
@@ -40,8 +48,15 @@ const MainContainer = () => {
     <MapContainer>
       <Map ref={mapRef} location={location} locations={locations} />
       <SearchContainer />
-      <ParkingTicket />
-      <ResetLocation handlerLocation={handlerLocation} />
+      <ParkingTicket
+        onClick={toggleTicketContainer}
+        isTicketVisible={isTicketVisible}
+      />
+      <TicketContainer isTicketVisible={isTicketVisible} />
+      <ResetLocation
+        handlerLocation={handlerLocation}
+        isTicketVisible={isTicketVisible}
+      />
     </MapContainer>
   );
 };
@@ -54,6 +69,8 @@ const MapContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  border: 1px solid;
+  overflow: hidden;
 `;
 
 const Loading = styled.div`

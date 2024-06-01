@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const ResetLocation = ({ handlerLocation }) => {
+const ResetLocation = ({ handlerLocation, isTicketVisible }) => {
   return (
-    <ResetBtn onClick={handlerLocation}>
+    <ResetBtn onClick={handlerLocation} isTicketVisible={isTicketVisible}>
       <img
         src={`${process.env.PUBLIC_URL}/icon/reset.png`}
         alt="Reset Location"
@@ -30,5 +30,6 @@ const ResetBtn = styled.button`
   cursor: pointer;
   position: absolute;
   right: 16px;
-  bottom: 100px;
+  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "270px" : "56px")};
+  transition: bottom 0.5s ease-in-out;
 `;

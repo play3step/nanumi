@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import MainIcon from "./atom/MainIcon";
 
-const ParkingTicket = () => {
+const ParkingTicket = ({ onClick, isTicketVisible }) => {
   return (
-    <Container>
+    <Container onClick={onClick} isTicketVisible={isTicketVisible}>
       <MainIcon type="ticket" />
       <p>주차권</p>
     </Container>
@@ -23,7 +23,8 @@ const Container = styled.button`
   gap: 12px;
   position: absolute;
   border-radius: 20px;
-  bottom: 56px;
+  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "270px" : "56px")};
   left: 50%;
   transform: translateX(-50%);
+  transition: bottom 0.5s ease-in-out;
 `;

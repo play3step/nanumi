@@ -30,6 +30,6 @@ const ResetBtn = styled.button`
   cursor: pointer;
   position: absolute;
   right: 16px;
-  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "270px" : "56px")};
+  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "226px" : "56px")};
   transition: bottom 0.5s ease-in-out;
 `;

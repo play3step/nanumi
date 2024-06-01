@@ -13,14 +13,20 @@ const MainContainer = () => {
   const [isTicketVisible, setTicketVisible] = useState(false);
 
   const locations = [
-    { latitude: location?.latitude, longitude: location?.longitude },
     {
-      latitude: location?.latitude + 0.001,
+      latitude: location?.latitude,
+      longitude: location?.longitude,
+      title: "강남",
+    },
+    {
+      latitude: location?.latitude + 0.011,
       longitude: location?.longitude + 0.004,
+      title: "홍대",
     },
     {
       latitude: location?.latitude - 0.002,
-      longitude: location?.longitude - 0.003,
+      longitude: location?.longitude - 0.013,
+      title: "건대",
     },
   ];
 
@@ -46,7 +52,12 @@ const MainContainer = () => {
 
   return (
     <MapContainer>
-      <Map ref={mapRef} location={location} locations={locations} />
+      <Map
+        ref={mapRef}
+        location={location}
+        locations={locations}
+        setTicketVisible={setTicketVisible}
+      />
       <SearchContainer />
       <ParkingTicket
         onClick={toggleTicketContainer}

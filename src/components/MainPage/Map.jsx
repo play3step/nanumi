@@ -7,7 +7,7 @@ import {
   useNavermaps,
 } from "react-naver-maps";
 
-const Map = forwardRef(({ location, locations }, ref) => {
+const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
   const navermaps = useNavermaps();
 
   useEffect(() => {
@@ -17,7 +17,10 @@ const Map = forwardRef(({ location, locations }, ref) => {
       );
     }
   }, [location, navermaps, ref]);
-
+  const handleMarkerClick = (loc) => {
+    ref.current.setCenter(new navermaps.LatLng(loc.latitude, loc.longitude));
+    setTicketVisible(true);
+  };
   return (
     <MapDiv style={{ width: "100%", height: "100%" }}>
       <NaverMap
@@ -31,6 +34,7 @@ const Map = forwardRef(({ location, locations }, ref) => {
           <Marker
             key={index}
             position={new navermaps.LatLng(loc.latitude, loc.longitude)}
+            onClick={() => handleMarkerClick(loc)}
           />
         ))}
       </NaverMap>

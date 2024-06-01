@@ -1,15 +1,21 @@
 import styled from "styled-components";
-import {
-  Container as MapDiv,
-  NaverMap,
-  Marker,
-  useNavermaps,
-} from "react-naver-maps";
 import useCurrentLocation from "../../hooks/useCurrentLocation";
+import Map from "./Map";
+import SearchContainer from "./SearchContainer";
+import ResetLocation from "./ResetLoctaion";
+import { useRef } from "react";
 
 const MainContainer = () => {
-  const navermaps = useNavermaps();
   const { location, error } = useCurrentLocation();
+  const mapRef = useRef(null);
+
+  const handlerLocation = () => {
+    if (mapRef.current && location) {
+      mapRef.current.setCenter(
+        new window.naver.maps.LatLng(location.latitude, location.longitude)
+      );
+    }
+  };
 
   if (!location) {
     return <Loading>Loading...</Loading>;
@@ -21,14 +27,9 @@ const MainContainer = () => {
 
   return (
     <MapContainer>
-      <MapDiv style={{ width: "100%", height: "100%" }}>
-        <NaverMap
-          defaultCenter={
-            new navermaps.LatLng(location.latitude, location.longitude)
-          }
-          defaultZoom={15}
-        ></NaverMap>
-      </MapDiv>
+      <Map ref={mapRef} location={location} />
+      <SearchContainer />
+      <ResetLocation handlerLocation={handlerLocation} />
     </MapContainer>
   );
 };
@@ -40,6 +41,7 @@ const MapContainer = styled.div`
   height: 844px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 `;
 
 const Loading = styled.div`

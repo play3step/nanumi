@@ -3,12 +3,23 @@ import useCurrentLocation from "../../hooks/useCurrentLocation";
 import Map from "./Map";
 import SearchContainer from "./SearchContainer";
 import ResetLocation from "./ResetLoctaion";
+import ParkingTicket from "./ParkingTicket";
 import { useRef } from "react";
 
 const MainContainer = () => {
   const { location, error } = useCurrentLocation();
   const mapRef = useRef(null);
-
+  const locations = [
+    { latitude: location?.latitude, longitude: location?.longitude },
+    {
+      latitude: location?.latitude + 0.001,
+      longitude: location?.longitude + 0.004,
+    },
+    {
+      latitude: location?.latitude - 0.002,
+      longitude: location?.longitude - 0.003,
+    },
+  ];
   const handlerLocation = () => {
     if (mapRef.current && location) {
       mapRef.current.setCenter(
@@ -27,8 +38,9 @@ const MainContainer = () => {
 
   return (
     <MapContainer>
-      <Map ref={mapRef} location={location} />
+      <Map ref={mapRef} location={location} locations={locations} />
       <SearchContainer />
+      <ParkingTicket />
       <ResetLocation handlerLocation={handlerLocation} />
     </MapContainer>
   );

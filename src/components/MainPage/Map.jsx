@@ -7,7 +7,7 @@ import {
   useNavermaps,
 } from "react-naver-maps";
 
-const Map = forwardRef(({ location }, ref) => {
+const Map = forwardRef(({ location, locations }, ref) => {
   const navermaps = useNavermaps();
 
   useEffect(() => {
@@ -27,9 +27,12 @@ const Map = forwardRef(({ location }, ref) => {
         }
         defaultZoom={15}
       >
-        <Marker
-          position={new navermaps.LatLng(location.latitude, location.longitude)}
-        />
+        {locations.map((loc, index) => (
+          <Marker
+            key={index}
+            position={new navermaps.LatLng(loc.latitude, loc.longitude)}
+          />
+        ))}
       </NaverMap>
     </MapDiv>
   );

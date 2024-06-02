@@ -17,17 +17,32 @@ const MainContainer = () => {
     {
       latitude: location?.latitude,
       longitude: location?.longitude,
-      title: "강남",
+      title: "주차장 1",
+      type: "나눔",
     },
     {
       latitude: location?.latitude + 0.011,
       longitude: location?.longitude + 0.004,
-      title: "홍대",
+      title: "주차장 2",
+      type: "공용",
+    },
+    {
+      latitude: location?.latitude + 0.002,
+      longitude: location?.longitude + 0.004,
+      title: "주차장 3",
+      type: "나눔",
+    },
+    {
+      latitude: location?.latitude + 0.005,
+      longitude: location?.longitude + 0.004,
+      title: "주차장 4",
+      type: "나눔",
     },
     {
       latitude: location?.latitude - 0.002,
       longitude: location?.longitude - 0.013,
-      title: "건대",
+      title: "주차장 5",
+      type: "공용",
     },
   ];
 

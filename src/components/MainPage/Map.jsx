@@ -25,6 +25,28 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       content: loc.title,
     }));
   };
+  const getMarkerIcon = (type) => {
+    if (type === "공용") {
+      return {
+        url: `${process.env.PUBLIC_URL}/icon/marker1.png`,
+        size: new navermaps.Size(65, 52),
+        scaledSize: new navermaps.Size(65, 52),
+        origin: new navermaps.Point(0, 0),
+        anchor: new navermaps.Point(16, 32),
+      };
+    } else if (type === "나눔") {
+      return {
+        url: `${process.env.PUBLIC_URL}/icon/marker2.png`,
+        size: new navermaps.Size(55, 65),
+        scaledSize: new navermaps.Size(55, 65),
+        origin: new navermaps.Point(0, 0),
+        anchor: new navermaps.Point(12, 24),
+      };
+    } else {
+      return null;
+    }
+  };
+
   return (
     <MapDiv style={{ width: "100%", height: "100%" }}>
       <NaverMap
@@ -38,6 +60,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
           <Marker
             key={index}
             position={new navermaps.LatLng(loc.latitude, loc.longitude)}
+            icon={getMarkerIcon(loc.type)}
             onClick={() => handleMarkerClick(loc)}
           />
         ))}

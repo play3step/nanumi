@@ -2,14 +2,8 @@ import styled from "styled-components";
 
 const TicketContainer = ({ isTicketVisible }) => {
   return (
-    <Container isTicketVisible={isTicketVisible}>
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: "#FFFFFF",
-        }}
-      ></div>
+    <Container isTicketVisible={isTicketVisible.isVisible}>
+      {isTicketVisible.content}
     </Container>
   );
 };
@@ -24,4 +18,7 @@ const Container = styled.div`
   left: 50%;
   transform: translateX(-50%);
   transition: bottom 0.5s ease-in-out;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  background-color: #ffffff;
 `;

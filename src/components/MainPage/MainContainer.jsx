@@ -6,11 +6,12 @@ import SearchContainer from "./SearchContainer";
 import ResetLocation from "./ResetLoctaion";
 import ParkingTicket from "./ParkingTicket";
 import TicketContainer from "./TicketContainer";
+import { TicketState } from "../../store/recoil";
 
 const MainContainer = () => {
   const { location, error } = useCurrentLocation();
   const mapRef = useRef(null);
-  const [isTicketVisible, setTicketVisible] = useState(false);
+  const [isTicketVisible, setTicketVisible] = useState(TicketState);
 
   const locations = [
     {
@@ -39,7 +40,10 @@ const MainContainer = () => {
   };
 
   const toggleTicketContainer = () => {
-    setTicketVisible((prev) => !prev);
+    setTicketVisible((prev) => ({
+      ...prev,
+      isVisible: !prev.isVisible,
+    }));
   };
 
   if (!location) {
@@ -61,12 +65,12 @@ const MainContainer = () => {
       <SearchContainer />
       <ParkingTicket
         onClick={toggleTicketContainer}
-        isTicketVisible={isTicketVisible}
+        isTicketVisible={isTicketVisible.isVisible}
       />
       <TicketContainer isTicketVisible={isTicketVisible} />
       <ResetLocation
         handlerLocation={handlerLocation}
-        isTicketVisible={isTicketVisible}
+        isTicketVisible={isTicketVisible.isVisible}
       />
     </MapContainer>
   );

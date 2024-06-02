@@ -19,7 +19,11 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
   }, [location, navermaps, ref]);
   const handleMarkerClick = (loc) => {
     ref.current.setCenter(new navermaps.LatLng(loc.latitude, loc.longitude));
-    setTicketVisible(true);
+    setTicketVisible((prev) => ({
+      ...prev,
+      isVisible: true,
+      content: loc.title,
+    }));
   };
   return (
     <MapDiv style={{ width: "100%", height: "100%" }}>

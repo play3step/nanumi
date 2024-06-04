@@ -1,5 +1,7 @@
+import Mypage from "../components/ProfilePage/Mypage";
+
 const ProfilePage = () => {
-  return <p>프로필 페이지</p>;
+  return <Mypage />;
 };
 
 export default ProfilePage;

@@ -32,7 +32,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
         size: new navermaps.Size(65, 52),
         scaledSize: new navermaps.Size(65, 52),
         origin: new navermaps.Point(0, 0),
-        anchor: new navermaps.Point(16, 32),
+        anchor: new navermaps.Point(32.5, 52),
       };
     } else if (type === "나눔") {
       return {
@@ -40,7 +40,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
         size: new navermaps.Size(55, 65),
         scaledSize: new navermaps.Size(55, 65),
         origin: new navermaps.Point(0, 0),
-        anchor: new navermaps.Point(12, 24),
+        anchor: new navermaps.Point(22.5, 65),
       };
     } else {
       return null;

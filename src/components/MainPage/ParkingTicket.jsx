@@ -27,9 +27,9 @@ const Container = styled.button`
     if (isTicketVisible.isVisible) {
       switch (isTicketVisible.type) {
         case "티켓":
-          return "226px";
+          return "266px";
         case "주차장":
-          return "166px";
+          return "206px";
         default:
           return "56px";
       }

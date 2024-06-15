@@ -19,10 +19,10 @@ export default ParkingContainer;
 
 const Container = styled.div`
   width: 390px;
-  height: 152px;
+  height: 192px;
   position: absolute;
   padding: 20px 28px;
-  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "0" : "-210px")};
+  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "0" : "-192x")};
   left: 50%;
   transform: translateX(-50%);
   transition: bottom 0.5s ease-in-out;

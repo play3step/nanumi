@@ -32,7 +32,7 @@ const PlaceState = ({ info }) => {
         >
           1시간 기준
         </p>
-        <PlaceText>5000원</PlaceText>
+        <PlaceText>{info.price_per_10min}</PlaceText>
       </div>
     </Container>
   );

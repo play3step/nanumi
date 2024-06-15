@@ -21,10 +21,10 @@ const TicketContainer = ({ isTicketVisible }) => {
 export default TicketContainer;
 const Container = styled.div`
   width: 390px;
-  height: 210px;
+  height: 250px;
   position: absolute;
   padding: 20px 28px;
-  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "0" : "-210px")};
+  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "0" : "-250px")};
   left: 50%;
   transform: translateX(-50%);
   transition: bottom 0.5s ease-in-out;

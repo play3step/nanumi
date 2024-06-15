@@ -663,7 +663,7 @@ export const ParkingLot = [
     visitor_data: "2024.06.08",
     category: "공영",
     total_digits: 32,
-    use_digit: 16,
+    use_digit: 30,
   },
   {
     parking_lot_id: 13,
@@ -693,7 +693,7 @@ export const ParkingLot = [
     visitor_data: "2024.06.08",
     category: "공영",
     total_digits: 26,
-    use_digit: 13,
+    use_digit: 23,
   },
   {
     parking_lot_id: 15,
@@ -738,7 +738,7 @@ export const ParkingLot = [
     visitor_data: "2024.06.08",
     category: "나눔",
     total_digits: 20,
-    use_digit: 10,
+    use_digit: 18,
   },
   {
     parking_lot_id: 18,
@@ -768,7 +768,7 @@ export const ParkingLot = [
     visitor_data: "2024.06.08",
     category: "나눔",
     total_digits: 27,
-    use_digit: 13,
+    use_digit: 23,
   },
   {
     parking_lot_id: 20,

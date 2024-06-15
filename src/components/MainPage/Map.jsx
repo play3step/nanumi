@@ -28,28 +28,69 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       type: "주차장",
     }));
   };
-  const getMarkerIcon = (type) => {
-    if (type === "공영") {
-      return {
-        url: `${process.env.PUBLIC_URL}/icon/marker1.png`,
-        size: new navermaps.Size(65, 52),
-        scaledSize: new navermaps.Size(65, 52),
-        origin: new navermaps.Point(0, 0),
-        anchor: new navermaps.Point(32.5, 52),
-      };
-    } else if (type === "나눔") {
-      return {
-        url: `${process.env.PUBLIC_URL}/icon/marker2.png`,
-        size: new navermaps.Size(55, 65),
-        scaledSize: new navermaps.Size(55, 65),
-        origin: new navermaps.Point(0, 0),
-        anchor: new navermaps.Point(22.5, 65),
-      };
-    } else {
-      return null;
-    }
-  };
+  const getMarkerIcon = (loc) => {
+    const remainingDigits = loc.total_digits - loc.use_digit;
+    const occupancyRate = (remainingDigits / loc.total_digits) * 100;
 
+    let status;
+    if (occupancyRate <= 20) {
+      status = "혼잡";
+    } else if (occupancyRate <= 50) {
+      status = "보통";
+    } else {
+      status = "여유";
+    }
+
+    let iconUrl;
+    let width, height, color;
+
+    if (loc.type === "공영") {
+      if (status === "혼잡") {
+        iconUrl = `${process.env.PUBLIC_URL}/marker/marker3.png`;
+      } else if (status === "보통") {
+        iconUrl = `${process.env.PUBLIC_URL}/marker/marker2.png`;
+      } else {
+        iconUrl = `${process.env.PUBLIC_URL}/marker/marker1.png`;
+      }
+      width = 65;
+      height = 52;
+      color = "#5899F7";
+    } else if (loc.type === "나눔") {
+      if (status === "혼잡") {
+        iconUrl = `${process.env.PUBLIC_URL}/marker/marker6.png`;
+      } else if (status === "보통") {
+        iconUrl = `${process.env.PUBLIC_URL}/marker/marker5.png`;
+      } else {
+        iconUrl = `${process.env.PUBLIC_URL}/marker/marker4.png`;
+      }
+      width = 55;
+      height = 65;
+      color = "#FFFFFF";
+    }
+
+    return {
+      content: `
+        <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+          <img src="${iconUrl}" alt="marker" style="width: ${width}px; height: ${height}px;" />
+          <div style="
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: ${color};
+          ">
+            ${loc.price_per_10min}
+          </div>
+        </div>
+      `,
+      size: new navermaps.Size(width, height),
+      anchor: new navermaps.Point(width / 2, height),
+    };
+  };
   return (
     <MapDiv style={{ width: "100%", height: "100%" }}>
       <NaverMap
@@ -68,7 +109,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
                 loc.location.longitude
               )
             }
-            icon={getMarkerIcon(loc.type)}
+            icon={getMarkerIcon(loc)}
             onClick={() => handleMarkerClick(loc)}
           />
         ))}

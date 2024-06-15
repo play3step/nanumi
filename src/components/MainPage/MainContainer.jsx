@@ -7,9 +7,11 @@ import ResetLocation from "./ResetLoctaion";
 import ParkingTicket from "./ParkingTicket";
 import TicketContainer from "./TicketContainer";
 import { TicketState } from "../../store/recoil";
+import { useNavigate } from "react-router-dom";
 
 const MainContainer = () => {
   const { location, error } = useCurrentLocation();
+  const nav = useNavigate();
   const mapRef = useRef(null);
   const [isTicketVisible, setTicketVisible] = useState(TicketState);
 
@@ -77,7 +79,7 @@ const MainContainer = () => {
         locations={locations}
         setTicketVisible={setTicketVisible}
       />
-      <SearchContainer />
+      <SearchContainer nav={nav} />
       <ParkingTicket
         onClick={toggleTicketContainer}
         isTicketVisible={isTicketVisible.isVisible}

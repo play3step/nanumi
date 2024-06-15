@@ -2,13 +2,15 @@ import styled from "styled-components";
 import MainIcon from "./atom/MainIcon";
 import CategoryBtn from "./atom/CategoryBtn";
 
-const SearchContainer = () => {
+const SearchContainer = ({ nav }) => {
   return (
     <Container>
       <SearchHeader>
-        <MainIcon type="person" />
-        <SearchText>목적지/주차장을 검색해주세요.</SearchText>
-        <MainIcon type="alert" />
+        <MainIcon type="person" onClick={() => nav(`/profile`)} />
+        <SearchText onClick={() => nav(`/search`)}>
+          목적지/주차장을 검색해주세요.
+        </SearchText>
+        <MainIcon type="alert" onClick={() => nav(`/NotificationPage`)} />
       </SearchHeader>
       <CategoryContainer>
         <CategoryBtn text="무료" />

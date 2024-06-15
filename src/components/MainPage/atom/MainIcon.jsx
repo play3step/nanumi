@@ -6,9 +6,9 @@ const IconList = [
   { type: "ticket", src: `${process.env.PUBLIC_URL}/icon/ticket.png` },
 ];
 
-const MainIcon = ({ type }) => {
+const MainIcon = ({ type, onClick }) => {
   const Icon = IconList.find((v) => v.type === type);
-  return <IconSize src={Icon.src} alt={Icon.type} />;
+  return <IconSize src={Icon.src} alt={Icon.type} onClick={onClick} />;
 };
 
 export default MainIcon;

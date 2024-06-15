@@ -4,7 +4,7 @@ export const TicketState = atom({
   key: "TicketState",
   default: {
     isVisible: false,
-    content: "",
+    parkingLotId: null,
     type: "",
   },
 });

@@ -1,10 +1,21 @@
 import styled from "styled-components";
 
-const PlaceState = () => {
+const PlaceState = ({ info }) => {
+  const remainingDigits = info.total_digits - info.use_digit;
+  const occupancyRate = (remainingDigits / info.total_digits) * 100;
+
+  let status;
+  if (occupancyRate <= 20) {
+    status = "혼잡";
+  } else if (occupancyRate <= 50) {
+    status = "보통";
+  } else {
+    status = "여유";
+  }
   return (
     <Container>
-      <Digits>8자리</Digits>
-      <StateText>(보통)</StateText>
+      <Digits>{remainingDigits}자리</Digits>
+      <StateText status={status}>{status}</StateText>
       <div
         style={{
           display: "flex",
@@ -41,8 +52,9 @@ const Digits = styled.p`
 `;
 
 const StateText = styled.p`
-  color: blue;
+  color: #3182f7;
   font-size: 28px;
+  margin-left: 4px;
 `;
 const PlaceText = styled.p`
   font-size: 20px;

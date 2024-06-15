@@ -18,16 +18,18 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
     }
   }, [location, navermaps, ref]);
   const handleMarkerClick = (loc) => {
-    ref.current.setCenter(new navermaps.LatLng(loc.latitude, loc.longitude));
+    ref.current.setCenter(
+      new navermaps.LatLng(loc.location.latitude, loc.location.longitude)
+    );
     setTicketVisible((prev) => ({
       ...prev,
       isVisible: true,
-      content: loc.title,
+      parkingLotId: loc.parking_lot_id,
       type: "주차장",
     }));
   };
   const getMarkerIcon = (type) => {
-    if (type === "공용") {
+    if (type === "공영") {
       return {
         url: `${process.env.PUBLIC_URL}/icon/marker1.png`,
         size: new navermaps.Size(65, 52),
@@ -60,7 +62,12 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
         {locations.map((loc, index) => (
           <Marker
             key={index}
-            position={new navermaps.LatLng(loc.latitude, loc.longitude)}
+            position={
+              new navermaps.LatLng(
+                loc.location.latitude,
+                loc.location.longitude
+              )
+            }
             icon={getMarkerIcon(loc.type)}
             onClick={() => handleMarkerClick(loc)}
           />

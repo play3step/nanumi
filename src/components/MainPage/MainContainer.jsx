@@ -9,45 +9,13 @@ import ParkingContainer from "./ParkingContainer";
 import { TicketState } from "../../store/recoil";
 import { useNavigate } from "react-router-dom";
 import TicketContainer from "./TicketContainer";
+import { ParkingLot } from "../../data";
 
 const MainContainer = () => {
   const { location, error } = useCurrentLocation();
   const nav = useNavigate();
   const mapRef = useRef(null);
   const [isTicketVisible, setTicketVisible] = useState(TicketState);
-
-  const locations = [
-    {
-      latitude: location?.latitude,
-      longitude: location?.longitude,
-      title: "주차장 1",
-      type: "나눔",
-    },
-    {
-      latitude: location?.latitude + 0.011,
-      longitude: location?.longitude + 0.004,
-      title: "주차장 2",
-      type: "공용",
-    },
-    {
-      latitude: location?.latitude + 0.002,
-      longitude: location?.longitude + 0.004,
-      title: "주차장 3",
-      type: "나눔",
-    },
-    {
-      latitude: location?.latitude + 0.005,
-      longitude: location?.longitude + 0.004,
-      title: "주차장 4",
-      type: "나눔",
-    },
-    {
-      latitude: location?.latitude - 0.002,
-      longitude: location?.longitude - 0.013,
-      title: "주차장 5",
-      type: "공용",
-    },
-  ];
 
   const handlerLocation = () => {
     if (mapRef.current && location) {
@@ -78,7 +46,7 @@ const MainContainer = () => {
       <Map
         ref={mapRef}
         location={location}
-        locations={locations}
+        locations={ParkingLot}
         setTicketVisible={setTicketVisible}
       />
       <SearchContainer nav={nav} />
@@ -87,7 +55,10 @@ const MainContainer = () => {
         isTicketVisible={isTicketVisible}
       />
       {isTicketVisible.type === "주차장" ? (
-        <ParkingContainer isTicketVisible={isTicketVisible} />
+        <ParkingContainer
+          isTicketVisible={isTicketVisible}
+          ParkingLot={ParkingLot}
+        />
       ) : (
         <TicketContainer isTicketVisible={isTicketVisible} />
       )}

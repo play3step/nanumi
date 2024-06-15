@@ -2,12 +2,15 @@ import styled from "styled-components";
 import ParkingInfo from "./ParkingInfo";
 import PlaceState from "./PlaceState";
 
-const ParkingContainer = ({ isTicketVisible }) => {
+const ParkingContainer = ({ isTicketVisible, ParkingLot }) => {
+  const Info = ParkingLot.find(
+    (v) => v.parking_lot_id === isTicketVisible.parkingLotId
+  );
   return (
     <Container isTicketVisible={isTicketVisible.isVisible}>
-      <ParkingInfo />
+      <ParkingInfo info={Info} />
       <SplitLine />
-      <PlaceState />
+      <PlaceState info={Info} />
     </Container>
   );
 };

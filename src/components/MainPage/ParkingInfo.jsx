@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
-const ParkingInfo = () => {
+const ParkingInfo = ({ info }) => {
   return (
     <Container>
       <TopBox>
         <PlaceStateImg />
-        <PlaceTitle>나눔 주차장</PlaceTitle>
+        <PlaceTitle>{info.place_name}</PlaceTitle>
         <SplitLine />
-        <PlaceState>나눔 주차장</PlaceState>
+        <PlaceState>{info.category}</PlaceState>
       </TopBox>
       <BottomBox>
-        <PlaceLocation>경기 시흥시 조남동 695</PlaceLocation>
+        <PlaceLocation>{info.address}</PlaceLocation>
       </BottomBox>
     </Container>
   );

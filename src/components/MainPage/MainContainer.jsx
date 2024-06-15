@@ -61,6 +61,7 @@ const MainContainer = () => {
     setTicketVisible((prev) => ({
       ...prev,
       isVisible: !prev.isVisible,
+      type: "티켓",
     }));
   };
 
@@ -83,13 +84,16 @@ const MainContainer = () => {
       <SearchContainer nav={nav} />
       <ParkingTicket
         onClick={toggleTicketContainer}
-        isTicketVisible={isTicketVisible.isVisible}
+        isTicketVisible={isTicketVisible}
       />
-      {/* <ParkingContainer isTicketVisible={isTicketVisible} /> */}
-      <TicketContainer isTicketVisible={isTicketVisible} />
+      {isTicketVisible.type === "주차장" ? (
+        <ParkingContainer isTicketVisible={isTicketVisible} />
+      ) : (
+        <TicketContainer isTicketVisible={isTicketVisible} />
+      )}
       <ResetLocation
         handlerLocation={handlerLocation}
-        isTicketVisible={isTicketVisible.isVisible}
+        isTicketVisible={isTicketVisible}
       />
     </MapContainer>
   );

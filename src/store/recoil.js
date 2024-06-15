@@ -5,5 +5,6 @@ export const TicketState = atom({
   default: {
     isVisible: false,
     content: "",
+    type: "",
   },
 });

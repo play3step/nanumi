@@ -23,7 +23,20 @@ const Container = styled.button`
   gap: 12px;
   position: absolute;
   border-radius: 20px;
-  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "226px" : "56px")};
+  bottom: ${({ isTicketVisible }) => {
+    if (isTicketVisible.isVisible) {
+      switch (isTicketVisible.type) {
+        case "티켓":
+          return "226px";
+        case "주차장":
+          return "166px";
+        default:
+          return "56px";
+      }
+    } else {
+      return "56px";
+    }
+  }};
   left: 50%;
   transform: translateX(-50%);
   transition: bottom 0.5s ease-in-out;

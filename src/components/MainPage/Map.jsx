@@ -23,6 +23,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       ...prev,
       isVisible: true,
       content: loc.title,
+      type: "주차장",
     }));
   };
   const getMarkerIcon = (type) => {

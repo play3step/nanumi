@@ -30,6 +30,19 @@ const ResetBtn = styled.button`
   cursor: pointer;
   position: absolute;
   right: 16px;
-  bottom: ${({ isTicketVisible }) => (isTicketVisible ? "226px" : "56px")};
+  bottom: ${({ isTicketVisible }) => {
+    if (isTicketVisible.isVisible) {
+      switch (isTicketVisible.type) {
+        case "티켓":
+          return "226px";
+        case "주차장":
+          return "166px";
+        default:
+          return "56px";
+      }
+    } else {
+      return "56px";
+    }
+  }};
   transition: bottom 0.5s ease-in-out;
 `;

@@ -1,22 +1,27 @@
 import styled from "styled-components";
-import ParkingInfo from "./ParkingInfo";
-import PlaceState from "./PlaceState";
+import TicketBox from "../atom/TicketBox";
 
 const TicketContainer = ({ isTicketVisible }) => {
   return (
     <Container isTicketVisible={isTicketVisible.isVisible}>
-      <ParkingInfo />
-      <SplitLine />
-      <PlaceState />
+      <div
+        style={{
+          display: "flex",
+          marginBottom: "24px",
+        }}
+      >
+        <TicketText>시흥시 공영 주차장</TicketText>
+        <SplitLine />
+        <ParkingType>공영주차장</ParkingType>
+      </div>
+      <TicketBox />
     </Container>
   );
 };
-
 export default TicketContainer;
-
 const Container = styled.div`
   width: 390px;
-  height: 152px;
+  height: 210px;
   position: absolute;
   padding: 20px 28px;
   bottom: ${({ isTicketVisible }) => (isTicketVisible ? "0" : "-210px")};
@@ -26,11 +31,24 @@ const Container = styled.div`
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+`;
+const TicketText = styled.p`
+  font-size: 16px;
+  color: #464646;
+`;
+const ParkingType = styled.p`
+  font-size: 14px;
+  color: #9f9f9f;
 `;
 
 const SplitLine = styled.div`
-  margin-top: 12px;
-  margin-bottom: 12px;
-  width: 334px;
-  border-bottom: 1px solid #9f9f9f;
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 16px;
+  border-left: 1px solid #9f9f9f;
 `;

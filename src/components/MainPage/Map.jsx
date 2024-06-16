@@ -74,16 +74,22 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
           <img src="${iconUrl}" alt="marker" style="width: ${width}px; height: ${height}px;" />
           <div style="
             position: absolute;
-            bottom: 30%;
+            bottom:20%;
             left: 50%;
             transform: translateX(-50%);
-            padding: 2px 4px;
+            padding: 0px 4px;
             border-radius: 4px;
             font-size: 12px;
             font-weight: bold;
             color: ${color};
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2px;
           ">
-            ${loc.price_per_10min}
+            <p style="font-size: 8px; font-weight: 500; margin: 0;">1시간</p>
+            <p style="margin: 4px 0 0 0;">${loc.price_per_10min}</p>
           </div>
         </div>
       `,

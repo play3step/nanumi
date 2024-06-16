@@ -1,6 +1,8 @@
 import React from "react";
 import { styled } from "styled-components";
 import ParkingTicketList from "./ParkingTicketList";
+import { useNavigate } from "react-router-dom";
+import TicketBox from "../atom/TicketBox";
 
 const Container = styled.div`
   margin: 0px;
@@ -10,7 +12,7 @@ const Container = styled.div`
   margin-right: auto;
   margin-left: auto;
   box-sizing: border-box;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
 `;
 const ListContainer = styled.div`
   overflow: scroll;
@@ -25,6 +27,9 @@ const ContentBox = styled.div`
 const BackTitle = styled.div`
   padding: 20px 20px;
   font-size: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 `;
 const NameImgBox = styled.div`
   display: flex;
@@ -118,17 +123,23 @@ const ListDate = styled.p`
   margin-top: 24px;
 `;
 const CurrentListImg = styled.div`
-  padding: 0px 0px 10px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 `;
 function Mypage(props) {
   // const {datas} = props;
-
+  const nav = useNavigate();
   return (
     <>
       <Container>
         <BackTitle>
-          뒤로가기
-          {/* 내 프로필..뒤로가기 컴포넌트가 있을 경우 여기에 */}
+          <img
+            src="./sources/img/icons/backBtn.png"
+            alt=""
+            onClick={() => nav(-1)}
+          />
+          내프로필
         </BackTitle>
         <ContentBox>
           <NameImgBox>
@@ -159,10 +170,7 @@ function Mypage(props) {
         </ContentBox>
         <CurrentListText>현재 이용 내역 확인</CurrentListText>
         <CurrentListImg>
-          <img
-            src="https://i.postimg.cc/W1RmBqbV/Frame-1000001907.png"
-            alt=""
-          />
+          <TicketBox />
         </CurrentListImg>
         <PastListBox>
           <PastListText>과거 이용 내역 확인</PastListText>

@@ -10,7 +10,7 @@ const SearchContainer = ({ nav }) => {
         <SearchText onClick={() => nav(`/search`)}>
           목적지/주차장을 검색해주세요.
         </SearchText>
-        <MainIcon type="alert" onClick={() => nav(`/NotificationPage`)} />
+        <MainIcon type="alert" onClick={() => nav(`/notification`)} />
       </SearchHeader>
       <CategoryContainer>
         <CategoryBtn text="무료" />

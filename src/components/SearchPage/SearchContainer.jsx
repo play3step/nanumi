@@ -3,12 +3,15 @@ import styled from "styled-components";
 import FavoritePlaceItem from "./FavoritePlaceItem";
 import CurrentPlaceList from "./CurrentPlaceList";
 import SearchPlaceList from "./SearchPlaceList";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 390px;
   height: 844px;
   overflow: hidden;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const SearchBar = styled.div`
@@ -136,7 +139,7 @@ const sample = [
 function SearchContainer(p) {
   const [isOn, setIsOn] = useState(false);
   const [slideVal, SetslideVal] = useState("0");
-
+  const nav = useNavigate();
   useEffect(() => {
     isOn ? SetslideVal("60px") : SetslideVal("0");
   }, [isOn]);
@@ -145,7 +148,11 @@ function SearchContainer(p) {
     <Container>
       {/* 검색 부분 */}
       <SearchBar>
-        <img src="./sources/img/icons/backBtn.png" alt="" />
+        <img
+          src="./sources/img/icons/backBtn.png"
+          alt=""
+          onClick={() => nav(-1)}
+        />
         <SearchInput
           onFocus={() => {
             setIsOn(true);

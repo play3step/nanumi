@@ -12,6 +12,8 @@ const BoxNoti = styled.div`
   gap: 10px;
   flex-direction: column;
   border-bottom: solid 1px #cbcbcb;
+  margin-left: auto;
+  margin-right: auto;
 `;
 const BoxInfo = styled.div`
   font-size: 14px;

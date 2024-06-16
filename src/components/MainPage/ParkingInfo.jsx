@@ -1,10 +1,21 @@
 import styled from "styled-components";
 
 const ParkingInfo = ({ info }) => {
+  const remainingDigits = info.total_digits - info.use_digit;
+  const occupancyRate = (remainingDigits / info.total_digits) * 100;
+
+  let status;
+  if (occupancyRate <= 20) {
+    status = "./pin/pin2.png";
+  } else if (occupancyRate <= 50) {
+    status = "./pin/pin1.png";
+  } else {
+    status = "./pin/pin3.png";
+  }
   return (
     <Container>
       <TopBox>
-        <PlaceStateImg />
+        <PlaceStateImg src={status} />
         <PlaceTitle>{info.place_name}</PlaceTitle>
         <SplitLine />
         <PlaceState>{info.category}</PlaceState>
@@ -33,10 +44,9 @@ const BottomBox = styled.div`
   margin-top: 4px;
 `;
 
-const PlaceStateImg = styled.div`
+const PlaceStateImg = styled.img`
   width: 18px;
   height: 18px;
-  border: 1px solid;
 `;
 const PlaceTitle = styled.p`
   font-size: 16px;

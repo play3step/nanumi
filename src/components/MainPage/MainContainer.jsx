@@ -16,6 +16,7 @@ const MainContainer = () => {
   const nav = useNavigate();
   const mapRef = useRef(null);
   const [isTicketVisible, setTicketVisible] = useState(TicketState);
+  const [selected, setSelected] = useState(null);
 
   const handlerLocation = () => {
     if (mapRef.current && location) {
@@ -33,6 +34,23 @@ const MainContainer = () => {
     }));
   };
 
+  const handleClick = (select) => {
+    setSelected((prev) => (prev === select ? null : select));
+  };
+
+  const getFilteredLocations = () => {
+    if (selected === null) {
+      return ParkingLot;
+    } else if (selected === 1) {
+      return ParkingLot.filter((lot) => lot.price_per_10min === 0);
+    } else if (selected === 2) {
+      return ParkingLot.filter((lot) => lot.price_per_10min > 0);
+    } else if (selected === 3) {
+      return ParkingLot.filter((lot) => lot.category === "나눔");
+    }
+    return ParkingLot;
+  };
+
   if (!location) {
     return <Loading>Loading...</Loading>;
   }
@@ -46,10 +64,14 @@ const MainContainer = () => {
       <Map
         ref={mapRef}
         location={location}
-        locations={ParkingLot}
+        locations={getFilteredLocations()}
         setTicketVisible={setTicketVisible}
       />
-      <SearchContainer nav={nav} />
+      <SearchContainer
+        nav={nav}
+        selected={selected}
+        handleClick={handleClick}
+      />
       <ParkingTicket
         onClick={toggleTicketContainer}
         isTicketVisible={isTicketVisible}

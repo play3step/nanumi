@@ -518,7 +518,7 @@ export const ParkingLot = [
   {
     parking_lot_id: 3,
     location: { latitude: 37.3443873, longitude: 126.7388123 },
-    price_per_10min: 1800,
+    price_per_10min: 0,
     type: "나눔",
     place_name: "토끼 주차장",
     address: "시흥시 야옹동",
@@ -548,7 +548,7 @@ export const ParkingLot = [
   {
     parking_lot_id: 5,
     location: { latitude: 37.3438815, longitude: 126.7364518 },
-    price_per_10min: 1600,
+    price_per_10min: 0,
     type: "나눔",
     place_name: "여우 주차장",
     address: "시흥시 캬옹동",
@@ -578,7 +578,7 @@ export const ParkingLot = [
   {
     parking_lot_id: 7,
     location: { latitude: 37.3391129, longitude: 126.7363857 },
-    price_per_10min: 1900,
+    price_per_10min: 0,
     type: "나눔",
     place_name: "사슴 주차장",
     address: "시흥시 캬옹동",
@@ -623,7 +623,7 @@ export const ParkingLot = [
   {
     parking_lot_id: 10,
     location: { latitude: 37.3461123, longitude: 126.7387765 },
-    price_per_10min: 1700,
+    price_per_10min: 0,
     type: "공영",
     place_name: "양 주차장",
     address: "시흥시 뇨냐뇽동",
@@ -653,7 +653,7 @@ export const ParkingLot = [
   {
     parking_lot_id: 12,
     location: { latitude: 37.3405596, longitude: 126.7378892 },
-    price_per_10min: 1600,
+    price_per_10min: 0,
     type: "공영",
     place_name: "닭 주차장",
     address: "시흥시 미햐옹동",

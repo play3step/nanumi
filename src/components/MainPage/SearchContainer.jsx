@@ -2,7 +2,7 @@ import styled from "styled-components";
 import MainIcon from "./atom/MainIcon";
 import CategoryBtn from "./atom/CategoryBtn";
 
-const SearchContainer = ({ nav }) => {
+const SearchContainer = ({ nav, selected, handleClick }) => {
   return (
     <Container>
       <SearchHeader>
@@ -13,9 +13,21 @@ const SearchContainer = ({ nav }) => {
         <MainIcon type="alert" onClick={() => nav(`/notification`)} />
       </SearchHeader>
       <CategoryContainer>
-        <CategoryBtn text="무료" />
-        <CategoryBtn text="유료" />
-        <CategoryBtn text="나눔주차장" />
+        <CategoryBtn
+          text="무료"
+          selected={selected === 1}
+          onClick={() => handleClick(1)}
+        />
+        <CategoryBtn
+          text="유료"
+          selected={selected === 2}
+          onClick={() => handleClick(2)}
+        />
+        <CategoryBtn
+          text="나눔주차장"
+          selected={selected === 3}
+          onClick={() => handleClick(3)}
+        />
       </CategoryContainer>
     </Container>
   );
@@ -41,6 +53,7 @@ const SearchHeader = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `;
+
 const SearchText = styled.div`
   width: 242px;
   height: 22px;

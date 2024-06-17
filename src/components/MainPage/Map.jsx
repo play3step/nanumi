@@ -1,5 +1,4 @@
 import React, { useEffect, forwardRef } from "react";
-
 import {
   Container as MapDiv,
   NaverMap,
@@ -17,6 +16,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       );
     }
   }, [location, navermaps, ref]);
+
   const handleMarkerClick = (loc) => {
     ref.current.setCenter(
       new navermaps.LatLng(loc.location.latitude, loc.location.longitude)
@@ -28,6 +28,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       type: "주차장",
     }));
   };
+
   const getMarkerIcon = (loc) => {
     const remainingDigits = loc.total_digits - loc.use_digit;
     const occupancyRate = (remainingDigits / loc.total_digits) * 100;
@@ -89,7 +90,9 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
             margin-top: 2px;
           ">
             <p style="font-size: 8px; font-weight: 500; margin: 0;">1시간</p>
-            <p style="margin: 4px 0 0 0;">${loc.price_per_10min}</p>
+            <p style="margin: 4px 0 0 0;font-size: 10px;" >${
+              loc.price_per_10min === 0 ? "무료" : loc.price_per_10min
+            }</p>
           </div>
         </div>
       `,
@@ -97,6 +100,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       anchor: new navermaps.Point(width / 2, height),
     };
   };
+
   return (
     <MapDiv style={{ width: "100%", height: "100%" }}>
       <NaverMap

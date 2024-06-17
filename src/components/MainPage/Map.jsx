@@ -20,7 +20,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
 
   const handleMarkerClick = (loc) => {
     setSelectedMarker(loc.parking_lot_id);
-    ref.current.setCenter(
+    ref.current.panTo(
       new navermaps.LatLng(loc.location.latitude, loc.location.longitude)
     );
     setTicketVisible((prev) => ({
@@ -82,7 +82,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
     }
 
     if (selectedMarker === loc.parking_lot_id) {
-      width *= 1.2; // Make the selected marker larger
+      width *= 1.2;
       height *= 1.2;
     }
 

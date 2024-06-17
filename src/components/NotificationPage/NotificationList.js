@@ -73,7 +73,7 @@ function NotificationList(props) {
       <SearchBar>
         <img
           src="./sources/img/icons/backBtn.png"
-          alt=""
+          alt="사진"
           onClick={() => nav(-1)}
         />
       </SearchBar>

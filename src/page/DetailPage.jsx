@@ -249,14 +249,14 @@ function DetailPage(props) {
             <BackTitle>
               <img
                 src={`${process.env.PUBLIC_URL}/sources/img/icons/backBtn.png`}
-                alt=""
+                alt="사진"
                 onClick={() => nav(-1)}
               />
             </BackTitle>
             <ParkingLotImage>
               <img
                 src={`${process.env.PUBLIC_URL}/ParkingPhoto.png`}
-                alt=""
+                alt="사진"
                 width={"100%"}
               />
             </ParkingLotImage>
@@ -268,7 +268,7 @@ function DetailPage(props) {
                   <Bookmark>
                     <img
                       src={`${process.env.PUBLIC_URL}/Bookmark_icon.png`}
-                      alt=""
+                      alt="사진"
                     />
                   </Bookmark>
                 </BoxTitle>
@@ -279,19 +279,19 @@ function DetailPage(props) {
                   <VacancyNotClicked_left>
                     <img
                       src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
-                      alt=""
+                      alt="사진"
                     />
                   </VacancyNotClicked_left>
                   <VacancyNotClicked_right>
                     <img
                       src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
-                      alt=""
+                      alt="사진"
                     />
                   </VacancyNotClicked_right>
                   <VacancyClicked>
                     <img
                       src={`${process.env.PUBLIC_URL}/VacancyClicked.png`}
-                      alt=""
+                      alt="사진"
                     />
                   </VacancyClicked>
                   <BlankSpace>남은자리 3/10</BlankSpace>
@@ -303,7 +303,7 @@ function DetailPage(props) {
                   <ParkingIcon>
                     <img
                       src={`${process.env.PUBLIC_URL}/Adress_icon.png`}
-                      alt=""
+                      alt="사진"
                     />
                   </ParkingIcon>
                   <ParkingInfo>{Info.address}</ParkingInfo>
@@ -312,7 +312,7 @@ function DetailPage(props) {
                   <ParkingIcon>
                     <img
                       src={`${process.env.PUBLIC_URL}/PhoneNumber_icon.png`}
-                      alt=""
+                      alt="사진"
                     />
                   </ParkingIcon>
                   <ParkingInfoBlue>{Info.number}</ParkingInfoBlue>
@@ -321,7 +321,7 @@ function DetailPage(props) {
                   <ParkingIcon>
                     <img
                       src={`${process.env.PUBLIC_URL}/Link_icon.png`}
-                      alt=""
+                      alt="사진"
                     />
                   </ParkingIcon>
                   <ParkingInfoBlue>{props.Link}</ParkingInfoBlue>
@@ -349,7 +349,7 @@ function DetailPage(props) {
                 <ImgData>
                   <img
                     src={`${process.env.PUBLIC_URL}/VistorDataGraph.png`}
-                    alt=""
+                    alt="사진"
                   />
                 </ImgData>
                 <WeekList>

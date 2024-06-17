@@ -150,7 +150,7 @@ function SearchContainer(p) {
       <SearchBar>
         <img
           src="./sources/img/icons/backBtn.png"
-          alt=""
+          alt="사진"
           onClick={() => nav(-1)}
         />
         <SearchInput
@@ -183,7 +183,7 @@ function SearchContainer(p) {
             <img
               style={{ transform: "rotate(180deg)" }}
               src="./sources/img/icons/backBtn.png"
-              alt=""
+              alt="사진"
             />
           </GoFavoriteBtn>
         </GoFavoritePage>

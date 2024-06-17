@@ -136,7 +136,7 @@ function Mypage(props) {
         <BackTitle>
           <img
             src="./sources/img/icons/backBtn.png"
-            alt=""
+            alt="사진"
             onClick={() => nav(-1)}
           />
           내프로필

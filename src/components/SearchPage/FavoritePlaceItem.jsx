@@ -21,7 +21,7 @@ const Place = styled.h1`
 function FavoritePlaceItem(p) {
   return (
     <FlexBox>
-      <img src="../sources/img/icons/star.png" alt="" />
+      <img src="../sources/img/icons/star.png" alt="사진" />
       <Place>{p.name || "나눔주차장1"}</Place>
     </FlexBox>
   );

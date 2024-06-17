@@ -13,7 +13,10 @@ const ParkingContainer = ({ isTicketVisible, ParkingLot }) => {
     nav(`/detail/${isTicketVisible.parkingLotId}`);
   };
   return (
-    <Container isTicketVisible={isTicketVisible.isVisible}>
+    <Container
+      isTicketVisible={isTicketVisible.isVisible}
+      onClick={pageNavHandle}
+    >
       <ParkingInfo info={Info} pageNavHandle={pageNavHandle} />
       <SplitLine />
       <PlaceState info={Info} />

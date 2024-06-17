@@ -38,6 +38,8 @@ const SearchBar = styled.div`
   align-items: center;
   gap: 12px;
   box-sizing: border-box;
+  font-size: 14px;
+
   padding: 20px 20px;
   border-bottom: solid 1.4px #cacaca;
 `;
@@ -76,6 +78,7 @@ function NotificationList(props) {
           alt="사진"
           onClick={() => nav(-1)}
         />
+        알림함
       </SearchBar>
       {Notifications.map(function (props) {
         return (

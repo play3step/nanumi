@@ -29,6 +29,7 @@ const Container = styled.div`
   padding: 17px 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const TopBox = styled.div`
@@ -65,6 +66,6 @@ const ValidTime = styled.p`
 
 const Price = styled.p`
   position: absolute;
-  right: 44px;
+  right: 14px;
   font-size: 20px;
 `;

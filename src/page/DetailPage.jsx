@@ -131,7 +131,9 @@ const TicketContainer = styled.div`
 const BuyButton = styled.div`
   width: 342px;
   height: 50px;
-  background-color: #2c4064;
+
+  background-color: ${({ selected }) => (selected ? "#2c4064" : "#EDECEC")};
+
   border-radius: 4px;
   display: flex;
   justify-content: center;
@@ -188,22 +190,9 @@ const WeekList = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 24px;
+  gap: 10px;
   margin-bottom: 16px;
   justify-content: center;
-`;
-const WeekClicked = styled.div`
-  width: 34px;
-  height: 34px;
-  text-align: center;
-  line-height: 30px;
-  font-size: 14px;
-  background-color: #3182f7;
-  border-radius: 50px;
-  color: #ffffff;
-`;
-const Week = styled.div`
-  font-size: 14px;
 `;
 const BackTitle = styled.div`
   z-index: 999;
@@ -234,12 +223,18 @@ function DetailPage(props) {
   const params = useParams();
   const Info = ParkingLot.find((v) => v.parking_lot_id === parseInt(params.id));
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [selectedDay, setSelectedDay] = useState("월");
+
   const handleTicketClick = (ticketId) => {
     setSelectedTicket(ticketId);
   };
+
   if (!Info) {
     return <div>해당 주차장을 찾을 수 없습니다.</div>;
   }
+  const handleDayClick = (day) => {
+    setSelectedDay(day);
+  };
   console.log(Info);
   return (
     <div>
@@ -337,7 +332,7 @@ function DetailPage(props) {
                   selected={selectedTicket === 2}
                   onClick={() => handleTicketClick(2)}
                 />
-                <BuyButton>주차권 구매</BuyButton>
+                <BuyButton selected={selectedTicket}>주차권 구매</BuyButton>
               </TicketContainer>
 
               <VisitorData>
@@ -353,13 +348,28 @@ function DetailPage(props) {
                   />
                 </ImgData>
                 <WeekList>
-                  <WeekClicked>월</WeekClicked>
-                  <Week>화</Week>
-                  <Week>수</Week>
-                  <Week>목</Week>
-                  <Week>금</Week>
-                  <Week>토</Week>
-                  <Week>일</Week>
+                  {["월", "화", "수", "목", "금", "토", "일"].map((day) => (
+                    <div
+                      key={day}
+                      onClick={() => handleDayClick(day)}
+                      style={{
+                        width: "34px",
+                        height: "34px",
+                        lineHeight: "30px",
+                        fontSize: "14px",
+                        borderRadius: "50px",
+                        cursor: "pointer",
+                        backgroundColor:
+                          selectedDay === day ? "#3182f7" : "#ffffff",
+                        color: selectedDay === day ? "#ffffff" : "#000000",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {day}
+                    </div>
+                  ))}
                 </WeekList>
               </VisitorData>
             </DetailContainer>

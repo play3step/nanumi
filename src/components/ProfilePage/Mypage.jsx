@@ -72,12 +72,16 @@ const CarNumberTextB = styled.p`
   font-weight: 700;
   color: #3182f7;
   padding-left: 20px;
+  display: flex;
+  align-items: center;
 `;
 const CarNumberText = styled.p`
   font-size: 14px;
   font-weight: 700;
   color: #696969;
   padding-right: 20px;
+  display: flex;
+  align-items: center;
 `;
 
 const MoblieNumber = styled.div`
@@ -94,12 +98,16 @@ const MoblieNumberTextB = styled.p`
   font-weight: 700;
   color: #3182f7;
   padding-left: 20px;
+  display: flex;
+  align-items: center;
 `;
 const MoblieNumberText = styled.p`
   font-size: 14px;
   font-weight: 700;
   color: #696969;
   padding-right: 20px;
+  display: flex;
+  align-items: center;
 `;
 const CurrentListText = styled.p`
   font-size: 14px;
@@ -170,7 +178,7 @@ function Mypage(props) {
         </ContentBox>
         <CurrentListText>현재 이용 내역 확인</CurrentListText>
         <CurrentListImg>
-          <TicketBox />
+          <TicketBox selected="ture" />
         </CurrentListImg>
         <PastListBox>
           <PastListText>과거 이용 내역 확인</PastListText>

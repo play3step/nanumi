@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import {
   Container as MapDiv,
   NaverMap,
@@ -8,6 +8,7 @@ import {
 
 const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
   const navermaps = useNavermaps();
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   useEffect(() => {
     if (ref?.current && location) {
@@ -18,6 +19,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
   }, [location, navermaps, ref]);
 
   const handleMarkerClick = (loc) => {
+    setSelectedMarker(loc.parking_lot_id);
     ref.current.setCenter(
       new navermaps.LatLng(loc.location.latitude, loc.location.longitude)
     );
@@ -26,6 +28,16 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       isVisible: true,
       parkingLotId: loc.parking_lot_id,
       type: "주차장",
+    }));
+  };
+
+  const handleMapClick = () => {
+    setSelectedMarker(null);
+    setTicketVisible((prev) => ({
+      ...prev,
+      isVisible: false,
+      parkingLotId: null,
+      type: "",
     }));
   };
 
@@ -69,13 +81,20 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
       color = "#FFFFFF";
     }
 
+    if (selectedMarker === loc.parking_lot_id) {
+      width *= 1.2; // Make the selected marker larger
+      height *= 1.2;
+    }
+
     return {
       content: `
-        <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+        <div style="position: relative; display: flex; flex-direction: column; align-items: center; opacity: ${
+          selectedMarker && selectedMarker !== loc.parking_lot_id ? 0.5 : 1
+        }; z-index: ${selectedMarker === loc.parking_lot_id ? 999 : 1};">
           <img src="${iconUrl}" alt="marker" style="width: ${width}px; height: ${height}px;" />
           <div style="
             position: absolute;
-            bottom:20%;
+            bottom: 26%;
             left: 50%;
             transform: translateX(-50%);
             padding: 0px 4px;
@@ -109,6 +128,7 @@ const Map = forwardRef(({ location, locations, setTicketVisible }, ref) => {
           new navermaps.LatLng(location.latitude, location.longitude)
         }
         defaultZoom={15}
+        onClick={handleMapClick}
       >
         {locations.map((loc, index) => (
           <Marker

@@ -14,7 +14,7 @@ const TicketContainer = ({ isTicketVisible }) => {
         <SplitLine />
         <ParkingType>공영주차장</ParkingType>
       </div>
-      <TicketBox />
+      <TicketBox selected="true" />
     </Container>
   );
 };
@@ -33,7 +33,7 @@ const Container = styled.div`
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
   padding-top: 20px;
 `;

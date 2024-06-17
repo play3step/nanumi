@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const TicketBox = () => {
+const TicketBox = ({ selected, onClick }) => {
   return (
-    <Container>
+    <Container selected={selected} onClick={onClick}>
       <TopBox>
         <TicketState>야간권</TicketState>
         <TicketDate>2024.05.23(오늘)</TicketDate>
@@ -24,8 +24,8 @@ const Container = styled.div`
   width: 332px;
   height: 124px;
   border-radius: 8px;
-  color: #ffffff;
-  background-color: #3182f7;
+  color: ${({ selected }) => (selected ? "#ffffff" : "#959595")};
+  background-color: ${({ selected }) => (selected ? "#3182f7" : "#EDECEC")};
   padding: 17px 20px;
   display: flex;
   flex-direction: column;

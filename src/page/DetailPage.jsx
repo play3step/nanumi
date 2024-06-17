@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ParkingLot } from "../data/index";
@@ -233,6 +233,13 @@ function DetailPage(props) {
   const nav = useNavigate();
   const params = useParams();
   const Info = ParkingLot.find((v) => v.parking_lot_id === parseInt(params.id));
+  const [selectedTicket, setSelectedTicket] = useState(null);
+  const handleTicketClick = (ticketId) => {
+    setSelectedTicket(ticketId);
+  };
+  if (!Info) {
+    return <div>해당 주차장을 찾을 수 없습니다.</div>;
+  }
   console.log(Info);
   return (
     <div>
@@ -322,8 +329,14 @@ function DetailPage(props) {
               </TextInfo>
 
               <TicketContainer>
-                <TicketBox />
-                <TicketBox />
+                <TicketBox
+                  selected={selectedTicket === 1}
+                  onClick={() => handleTicketClick(1)}
+                />
+                <TicketBox
+                  selected={selectedTicket === 2}
+                  onClick={() => handleTicketClick(2)}
+                />
                 <BuyButton>주차권 구매</BuyButton>
               </TicketContainer>
 

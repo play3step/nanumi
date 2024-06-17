@@ -91,6 +91,7 @@ function PlaceList(props) {
               <img
                 src={props.type || "parkIcon.png"}
                 style={Styles.PlaceType}
+                alt="사진"
               />
             </ImgPlaceType>
             <TextPlaceName>{props.name || "장소이름"}</TextPlaceName>
@@ -99,7 +100,7 @@ function PlaceList(props) {
         </PlaceInfo>
 
         <BtnFun>
-          <img src={funcIcon} style={Styles.Function} />
+          <img src={funcIcon} style={Styles.Function} alt="사진" />
         </BtnFun>
         {/* <BtnFun
           onClick={() => {

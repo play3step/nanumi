@@ -67,12 +67,12 @@ const ParkingSpaceImg = styled.div`
   position: relative;
   scrollbar-width: none;
 `;
-const VacancyNotClicked_left = styled.div`
+const VacancyNotClickedLeft = styled.div`
   position: absolute;
   top: 12px;
   left: -100px;
 `;
-const VacancyNotClicked_right = styled.div`
+const VacancyNotClickedRight = styled.div`
   position: absolute;
   top: 12px;
   left: 300px;
@@ -276,18 +276,18 @@ function DetailPage(props) {
                 <Floor>1층</Floor>
 
                 <ParkingSpaceImg>
-                  <VacancyNotClicked_left>
+                  <VacancyNotClickedLeft>
                     <img
                       src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
                       alt="사진"
                     />
-                  </VacancyNotClicked_left>
-                  <VacancyNotClicked_right>
+                  </VacancyNotClickedLeft>
+                  <VacancyNotClickedRight>
                     <img
                       src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
                       alt="사진"
                     />
-                  </VacancyNotClicked_right>
+                  </VacancyNotClickedRight>
                   <VacancyClicked>
                     <img
                       src={`${process.env.PUBLIC_URL}/VacancyClicked.png`}

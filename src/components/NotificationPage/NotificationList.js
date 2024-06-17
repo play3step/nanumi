@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const BoxNoti = styled.div`
@@ -31,6 +32,15 @@ const Date = styled.div`
   font-size: 8px;
   color: #a7a7a7;
 `;
+const SearchBar = styled.div`
+  width: 390px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: 20px 20px;
+  border-bottom: solid 1.4px #cacaca;
+`;
 
 const Notifications = [
   {
@@ -51,8 +61,22 @@ const Notifications = [
 ];
 
 function NotificationList(props) {
+  const nav = useNavigate();
   return (
-    <div>
+    <div
+      style={{
+        marginLeft: "auto",
+        marginRight: "auto",
+        width: "390px",
+      }}
+    >
+      <SearchBar>
+        <img
+          src="./sources/img/icons/backBtn.png"
+          alt=""
+          onClick={() => nav(-1)}
+        />
+      </SearchBar>
       {Notifications.map(function (props) {
         return (
           <BoxNoti>

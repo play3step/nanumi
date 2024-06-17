@@ -1,6 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { ParkingLot } from "../data/index";
+import TicketBox from "../components/atom/TicketBox";
 
 const Container = styled.div`
   width: 390px;
@@ -118,21 +120,25 @@ const ParkingIcon = styled.div`
   height: 30px;
 `;
 
-const TicketBox = styled.div`
+const TicketContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 `;
-const Ticket = styled.div`
-  width: 342px;
-  height: 92px;
-  background-color: #c0c0c0;
-`;
+
 const BuyButton = styled.div`
   width: 342px;
-  height: 48px;
-  background-color: #c0c0c0;
+  height: 50px;
+  background-color: #2c4064;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
 `;
 
 //방문자 데이터
@@ -225,6 +231,9 @@ const DetailInfo = [
 
 function DetailPage(props) {
   const nav = useNavigate();
+  const params = useParams();
+  const Info = ParkingLot.find((v) => v.parking_lot_id === parseInt(params.id));
+  console.log(Info);
   return (
     <div>
       {DetailInfo.map(function (props) {
@@ -232,21 +241,28 @@ function DetailPage(props) {
           <Container>
             <BackTitle>
               <img
-                src="./sources/img/icons/backBtn.png"
+                src={`${process.env.PUBLIC_URL}/sources/img/icons/backBtn.png`}
                 alt=""
                 onClick={() => nav(-1)}
               />
             </BackTitle>
             <ParkingLotImage>
-              <img src={"ParkingPhoto.png"} alt="" width={"100%"} />
+              <img
+                src={`${process.env.PUBLIC_URL}/ParkingPhoto.png`}
+                alt=""
+                width={"100%"}
+              />
             </ParkingLotImage>
             <DetailContainer>
               <InfoBox>
                 <BoxTitle>
                   <Bookmark></Bookmark>
-                  <PlaceName>{props.PlaceName}</PlaceName>
+                  <PlaceName>{Info.place_name}</PlaceName>
                   <Bookmark>
-                    <img src={"Bookmark_icon.png"} alt="" />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/Bookmark_icon.png`}
+                      alt=""
+                    />
                   </Bookmark>
                 </BoxTitle>
 
@@ -254,13 +270,22 @@ function DetailPage(props) {
 
                 <ParkingSpaceImg>
                   <VacancyNotClicked_left>
-                    <img src={"VacancyNotClicked.png"} alt="" />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
+                      alt=""
+                    />
                   </VacancyNotClicked_left>
                   <VacancyNotClicked_right>
-                    <img src={"VacancyNotClicked.png"} alt="" />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
+                      alt=""
+                    />
                   </VacancyNotClicked_right>
                   <VacancyClicked>
-                    <img src={"VacancyClicked.png"} alt="" />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/VacancyClicked.png`}
+                      alt=""
+                    />
                   </VacancyClicked>
                   <BlankSpace>남은자리 3/10</BlankSpace>
                 </ParkingSpaceImg>
@@ -269,29 +294,38 @@ function DetailPage(props) {
               <TextInfo>
                 <BoxInfo>
                   <ParkingIcon>
-                    <img src={"Adress_icon.png"} alt="" />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/Adress_icon.png`}
+                      alt=""
+                    />
                   </ParkingIcon>
-                  <ParkingInfo>{props.Address}</ParkingInfo>
+                  <ParkingInfo>{Info.address}</ParkingInfo>
                 </BoxInfo>
                 <BoxInfo>
                   <ParkingIcon>
-                    <img src={"PhoneNumber_icon.png"} alt="" />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/PhoneNumber_icon.png`}
+                      alt=""
+                    />
                   </ParkingIcon>
-                  <ParkingInfoBlue>{props.Number}</ParkingInfoBlue>
+                  <ParkingInfoBlue>{Info.number}</ParkingInfoBlue>
                 </BoxInfo>
                 <BoxInfo>
                   <ParkingIcon>
-                    <img src={"Link_icon.png"} alt="" />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/Link_icon.png`}
+                      alt=""
+                    />
                   </ParkingIcon>
                   <ParkingInfoBlue>{props.Link}</ParkingInfoBlue>
                 </BoxInfo>
               </TextInfo>
 
-              <TicketBox>
-                <Ticket>야간권</Ticket>
-                <Ticket>야간권</Ticket>
+              <TicketContainer>
+                <TicketBox />
+                <TicketBox />
                 <BuyButton>주차권 구매</BuyButton>
-              </TicketBox>
+              </TicketContainer>
 
               <VisitorData>
                 <VisitorTitleBox>
@@ -300,7 +334,10 @@ function DetailPage(props) {
                 </VisitorTitleBox>
                 <VisitorSubTitle>시간별 인기도</VisitorSubTitle>
                 <ImgData>
-                  <img src={"VistorDataGraph.png"} alt="" />
+                  <img
+                    src={`${process.env.PUBLIC_URL}/VistorDataGraph.png`}
+                    alt=""
+                  />
                 </ImgData>
                 <WeekList>
                   <WeekClicked>월</WeekClicked>

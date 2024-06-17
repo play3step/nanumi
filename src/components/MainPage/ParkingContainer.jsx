@@ -1,14 +1,20 @@
 import styled from "styled-components";
 import ParkingInfo from "./ParkingInfo";
 import PlaceState from "./PlaceState";
+import { useNavigate } from "react-router-dom";
 
 const ParkingContainer = ({ isTicketVisible, ParkingLot }) => {
   const Info = ParkingLot.find(
     (v) => v.parking_lot_id === isTicketVisible.parkingLotId
   );
+  console.log(isTicketVisible);
+  const nav = useNavigate();
+  const pageNavHandle = () => {
+    nav(`/detail/${isTicketVisible.parkingLotId}`);
+  };
   return (
     <Container isTicketVisible={isTicketVisible.isVisible}>
-      <ParkingInfo info={Info} />
+      <ParkingInfo info={Info} pageNavHandle={pageNavHandle} />
       <SplitLine />
       <PlaceState info={Info} />
     </Container>

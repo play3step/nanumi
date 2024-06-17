@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ParkingInfo = ({ info }) => {
+const ParkingInfo = ({ info, pageNavHandle }) => {
   const remainingDigits = info.total_digits - info.use_digit;
   const occupancyRate = (remainingDigits / info.total_digits) * 100;
 
@@ -13,7 +13,7 @@ const ParkingInfo = ({ info }) => {
     status = "./pin/pin3.png";
   }
   return (
-    <Container>
+    <Container onClick={pageNavHandle}>
       <TopBox>
         <PlaceStateImg src={status} />
         <PlaceTitle>{info.place_name}</PlaceTitle>

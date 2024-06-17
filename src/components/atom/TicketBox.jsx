@@ -59,7 +59,9 @@ const PlaceTitle = styled.p`
   font-weight: bold;
 `;
 
-const ValidTime = styled.p``;
+const ValidTime = styled.p`
+  font-size: 14px;
+`;
 
 const Price = styled.p`
   position: absolute;

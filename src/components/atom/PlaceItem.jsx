@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const BoxPlace = styled.div`
@@ -36,6 +36,7 @@ const ImgPlaceType = styled.div`
   width: 20px;
   height: 16px;
 `;
+
 const TextPlaceName = styled.div`
   font-size: 14px;
 `;
@@ -62,57 +63,43 @@ const Styles = {
 };
 
 function PlaceList(props) {
-  /////////////  props.id 리스트 아이템 순서 / props.type 주차장 종류 / props.name 주차장 이름 / props.address 주차장 주소 / props.funcType 아이템 기능
-
-  const [funcIcon, setFuncIcon] = useState("./sources/img/icons/bin.png");
-
-  const funcType = props.funcType;
+  const [funcIcon, setFuncIcon] = useState(
+    `${process.env.PUBLIC_URL}/sources/img/icons/bin.png`
+  );
 
   useEffect(() => {
-    if (funcType === "normal") {
-      setFuncIcon("./sources/img/icons/bin.png");
+    if (props.funcType === "공영") {
+      setFuncIcon(`${process.env.PUBLIC_URL}/sources/img/icons/bin.png`);
     }
-    if (funcType === "erase") {
-      setFuncIcon("./sources/img/icons/erase.png");
+    if (props.funcType === "나눔") {
+      setFuncIcon(`${process.env.PUBLIC_URL}/sources/img/icons/erase.png`);
     }
-    if (funcType === "delete") {
-      setFuncIcon("./sources/img/icons/delete.png");
+    if (props.funcType === "delete") {
+      setFuncIcon(`${process.env.PUBLIC_URL}/sources/img/icons/delete.png`);
     }
-  }, [funcType]);
+  }, [props.funcType]);
 
   return (
-    <div>
-      <BoxPlace id={props.id}>
-        <PlaceInfo>
-          <BoxPlaceName>
-            {/* <ImgPlaceType><img src={props.PlaceType} style={Styles.PlaceType}/></ImgPlaceType> */}
-            <ImgPlaceType>
-              <img
-                src={props.type || "parkIcon.png"}
-                style={Styles.PlaceType}
-                alt="사진"
-              />
-            </ImgPlaceType>
-            <TextPlaceName>{props.name || "장소이름"}</TextPlaceName>
-          </BoxPlaceName>
-          <Address>{props.address || "장소 주소"}</Address>
-        </PlaceInfo>
+    <BoxPlace id={props.id}>
+      <PlaceInfo>
+        <BoxPlaceName>
+          <ImgPlaceType>
+            <img
+              src={props.type || `${process.env.PUBLIC_URL}/parkIcon.png`}
+              style={Styles.PlaceType}
+              alt="사진"
+            />
+          </ImgPlaceType>
+          <TextPlaceName>{props.name || "장소이름"}</TextPlaceName>
+        </BoxPlaceName>
+        <Address>{props.address || "장소 주소"}</Address>
+      </PlaceInfo>
 
-        <BtnFun>
-          <img src={funcIcon} style={Styles.Function} alt="사진" />
-        </BtnFun>
-        {/* <BtnFun
-          onClick={() => {
-            func();
-          }}
-        >
-          <img
-            src={props.funcType || "cancelIcon.png"}
-            style={Styles.Function}
-          />
-        </BtnFun> */}
-      </BoxPlace>
-    </div>
+      <BtnFun>
+        <img src={funcIcon} style={Styles.Function} alt="사진" />
+      </BtnFun>
+    </BoxPlace>
   );
 }
+
 export default PlaceList;

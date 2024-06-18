@@ -13,6 +13,7 @@ const Container = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
 `;
 const ParkingLotImage = styled.div`
   width: 100%;
@@ -20,6 +21,7 @@ const ParkingLotImage = styled.div`
   background-color: #c0c0c0;
   position: absolute;
   top: 0;
+  left: 0;
 `;
 const DetailContainer = styled.div`
   width: 390px;
@@ -63,25 +65,42 @@ const Floor = styled.div`
 const ParkingSpaceImg = styled.div`
   width: 100%;
   height: 224px;
-  overflow-x: hidden;
   position: relative;
   scrollbar-width: none;
+  margin-top: 24px;
 `;
+
+//--------------------------------------------------------
+
+const ImgSlide = styled.div`
+  transition: all 0.3s;
+  transform: ${(p) => p.slide};
+`;
+
 const VacancyNotClickedLeft = styled.div`
   position: absolute;
-  top: 12px;
-  left: -100px;
+  left: 0px;
+  z-index: 2;
+  transition: all 0.3s;
+  transform: ${(p) => p.scale};
 `;
-const VacancyNotClickedRight = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 300px;
-`;
+
 const VacancyClicked = styled.div`
   position: absolute;
-  top: -18px;
-  left: 40px;
+  left: 248px;
+  z-index: ${(p) => p.zIndex};
+  transition: all 0.3s;
+  transform: ${(p) => p.scale};
 `;
+
+const VacancyNotClickedRight = styled.div`
+  position: absolute;
+  left: 496px;
+  z-index: 0;
+  transition: all 0.3s;
+  transform: ${(p) => p.scale};
+`;
+
 const BlankSpace = styled.div`
   font-size: 12px;
   font-weight: bold;
@@ -226,6 +245,79 @@ const DetailInfo = [
   },
 ];
 
+//-------------------------------------------------------------------------------------------
+
+const LeftBox = styled.div`
+  width: 68px;
+  height: 234px;
+  position: absolute;
+  left: 0;
+  top: 320px;
+  z-index: 3;
+  opacity: 0.4;
+`;
+
+const RightBox = styled.div`
+  width: 68px;
+  height: 234px;
+  position: absolute;
+  right: 0;
+  top: 320px;
+  z-index: 3;
+  opacity: 0.4;
+`;
+
+const LeftBox2 = styled.div`
+  width: 68px;
+  height: 176px;
+  position: absolute;
+  left: 0;
+  top: 52px;
+  z-index: 3;
+  opacity: 0.4;
+`;
+
+const RightBox2 = styled.div`
+  width: 68px;
+  height: 176px;
+  position: absolute;
+  right: 0;
+  top: 52px;
+  z-index: 3;
+  opacity: 0.4;
+`;
+
+const ParkingImgList = styled.div`
+  width: max-content;
+  height: 100%;
+  display: flex;
+  transition: all 0.3s;
+  transform: ${(p) => p.move};
+`;
+
+const ParkingImg = styled.div`
+  width: 390px;
+  height: 100%;
+  background: url(${(p) => p.background});
+`;
+
+const ParkingImgNum = styled.div`
+  font-weight: 800;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 8px 14px;
+  color: #333;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.6);
+  border: solid 1px #333;
+  position: absolute;
+  z-index: 4;
+  bottom: 42px;
+  right: 24px;
+`;
+
+//-------------------------------------------------------------------------------------------
+
 const weekImages = {
   1: `${process.env.PUBLIC_URL}/VistorDataGraph/Mon.png`,
   2: `${process.env.PUBLIC_URL}/VistorDataGraph/Tue.png`,
@@ -255,6 +347,61 @@ function DetailPage(props) {
     setSelectedTicket(ticketId);
   };
 
+  // 주차장 이미지 관련 -----------------------------------------------------------------------------------
+
+  const [imgCount2, setImgCount2] = useState(0);
+  const [imgMove, setImgMove] = useState("translateX(0px)");
+
+  const countUp2 = () => {
+    if (imgCount2 < 3) {
+      setImgCount2(imgCount2 + 1);
+    }
+  };
+
+  const countDown2 = () => {
+    if (imgCount2 > 0) {
+      setImgCount2(imgCount2 - 1);
+    }
+  };
+
+  // 주차장 약도 관련 -----------------------------------------------------------------------------------
+
+  const [floor, setFloor] = useState("1층");
+
+  const [imgSlide, setImgSlide] = useState("translateX(-172px)");
+
+  const [imgCount, setImgCount] = useState(1);
+
+  const [img1, setImg1] = useState(
+    process.env.PUBLIC_URL + "/parkingImg/B1F_Gray.svg"
+  );
+  const [img2, setImg2] = useState(
+    process.env.PUBLIC_URL + "/parkingImg/B2F_Blue.svg"
+  );
+  const [img3, setImg3] = useState(
+    process.env.PUBLIC_URL + "/parkingImg/B3F_Gray.svg"
+  );
+
+  const [scale1, setScale1] = useState("scale(1)");
+  const [scale2, setScale2] = useState("scale(1.2)");
+  const [scale3, setScale3] = useState("scale(1)");
+
+  const [zIndex, setZIndex] = useState("2");
+
+  const countUp = () => {
+    if (imgCount < 2) {
+      setImgCount(imgCount + 1);
+    }
+  };
+
+  const countDown = () => {
+    if (imgCount > 0) {
+      setImgCount(imgCount - 1);
+    }
+  };
+
+  // ------------------------------------------------------------------------------------------------------
+
   const [selectedWeek, setselectedWeek] = useState(1);
   const selectedWeekClick = (WeekId) => {
     setselectedWeek(WeekId);
@@ -278,11 +425,42 @@ function DetailPage(props) {
               />
             </BackTitle>
             <ParkingLotImage>
-              <img
-                src={`${process.env.PUBLIC_URL}/ParkingPhoto.png`}
-                alt="사진"
-                width={"100%"}
-              />
+              <LeftBox2
+                onClick={() => {
+                  countDown2();
+                  if (imgCount2 === 1) {
+                    setImgMove("translateX(0px)");
+                  } else if (imgCount2 === 2) {
+                    setImgMove("translateX(-390px)");
+                  } else if (imgCount2 === 3) {
+                    setImgMove("translateX(-780px)");
+                  }
+                }}
+              ></LeftBox2>
+              <RightBox2
+                onClick={() => {
+                  countUp2();
+                  if (imgCount2 === 0) {
+                    setImgMove("translateX(-390px)");
+                  } else if (imgCount2 === 1) {
+                    setImgMove("translateX(-780px)");
+                  } else if (imgCount2 === 2) {
+                    setImgMove("translateX(-1170px)");
+                  }
+                }}
+              ></RightBox2>
+              <ParkingImgNum>{imgCount2 + 1}/4</ParkingImgNum>
+              <ParkingImgList move={imgMove}>
+                {Info.parking_lot_image.map((p) => {
+                  return (
+                    <ParkingImg
+                      background={
+                        process.env.PUBLIC_URL + "/parking/" + p + ".jpg"
+                      }
+                    ></ParkingImg>
+                  );
+                })}
+              </ParkingImgList>
             </ParkingLotImage>
             <DetailContainer>
               <InfoBox>
@@ -297,27 +475,83 @@ function DetailPage(props) {
                   </Bookmark>
                 </BoxTitle>
 
-                <Floor>1층</Floor>
+                <Floor>{floor}</Floor>
+
+                <LeftBox
+                  onClick={() => {
+                    countDown();
+                    if (imgCount === 1) {
+                      setFloor("B1층");
+                      setImgSlide("translateX(72px)");
+                      setImg1(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Blue.svg"
+                      );
+                      setImg2(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Gray.svg"
+                      );
+                      setScale1("scale(1.2)");
+                      setScale2("scale(1)");
+                      setZIndex("0");
+                    }
+                    if (imgCount === 2) {
+                      setFloor("1층");
+                      setImgSlide("translateX(-172px)");
+                      setImg3(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Gray.svg"
+                      );
+                      setImg2(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Blue.svg"
+                      );
+                      setScale3("scale(1)");
+                      setScale2("scale(1.2)");
+                      setZIndex("3");
+                    }
+                  }}
+                ></LeftBox>
+                <RightBox
+                  onClick={() => {
+                    countUp();
+                    if (imgCount === 0) {
+                      setFloor("1층");
+                      setImgSlide("translateX(-172px)");
+                      setImg1(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Gray.svg"
+                      );
+                      setImg2(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Blue.svg"
+                      );
+                      setScale1("scale(1)");
+                      setScale2("scale(1.2)");
+                      setZIndex("3");
+                    }
+                    if (imgCount === 1) {
+                      setFloor("2층");
+                      setImgSlide("translateX(-418px)");
+                      setImg3(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Blue.svg"
+                      );
+                      setImg2(
+                        process.env.PUBLIC_URL + "/parkingImg/B1F_Gray.svg"
+                      );
+                      setScale3("scale(1.2)");
+                      setScale2("scale(1)");
+                      setZIndex("0");
+                    }
+                  }}
+                ></RightBox>
 
                 <ParkingSpaceImg>
-                  <VacancyNotClickedLeft>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
-                      alt="사진"
-                    />
-                  </VacancyNotClickedLeft>
-                  <VacancyNotClickedRight>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/VacancyNotClicked.png`}
-                      alt="사진"
-                    />
-                  </VacancyNotClickedRight>
-                  <VacancyClicked>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/VacancyClicked.png`}
-                      alt="사진"
-                    />
-                  </VacancyClicked>
+                  <ImgSlide slide={imgSlide}>
+                    <VacancyNotClickedLeft scale={scale1}>
+                      <img src={img1} alt="사진" />
+                    </VacancyNotClickedLeft>
+                    <VacancyClicked zIndex={zIndex} scale={scale2}>
+                      <img src={img2} alt="사진" />
+                    </VacancyClicked>
+                    <VacancyNotClickedRight scale={scale3}>
+                      <img src={img3} alt="사진" />
+                    </VacancyNotClickedRight>
+                  </ImgSlide>
                   <BlankSpace>남은자리 3/10</BlankSpace>
                 </ParkingSpaceImg>
               </InfoBox>

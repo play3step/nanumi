@@ -201,7 +201,7 @@ function SearchContainer() {
       <CurrentPlaceList />
 
       <SearchListBox slide={slideVal + "px"}>
-        <SearchPlaceList />
+        <SearchPlaceList query={query} />
       </SearchListBox>
     </Container>
   );

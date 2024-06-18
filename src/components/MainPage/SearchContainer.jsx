@@ -4,23 +4,36 @@ import styled from "styled-components";
 import MainIcon from "./atom/MainIcon";
 import CategoryBtn from "./atom/CategoryBtn";
 
-const SearchContainer = ({ nav, selected, open, handleClick }) => {
+const SearchContainer = ({
+  nav,
+  selected,
+  open,
+  handleClick,
+  searchText,
+  resetFilter,
+}) => {
   const [timeSelect, setTimeSelect] = useState(false);
   const [timeColor, setTimeColor] = useState("#909090");
   const [timeBg, setTimeBg] = useState("#f3f3f3");
+
   const [timeImg, setTImeImg] = useState(
     process.env.PUBLIC_URL + "/icon/dn_unselect.png"
   );
   const [openRotate, setOpenRotate] = useState("rotate(0deg)");
-
   return (
     <Container>
       <SearchHeader>
-        <MainIcon type="person" onClick={() => nav(`/profile`)} />
+        {searchText ? (
+          <MainIcon type="back" onClick={resetFilter} />
+        ) : (
+          <MainIcon type="person" onClick={() => nav(`/profile`)} />
+        )}
         <SearchText onClick={() => nav(`/search`)}>
-          목적지/주차장을 검색해주세요.
+          {searchText || " 목적지/주차장을 검색해주세요."}
         </SearchText>
-        <MainIcon type="alert" onClick={() => nav(`/notification`)} />
+        <AlertPostion>
+          <MainIcon type="alert" onClick={() => nav(`/notification`)} />
+        </AlertPostion>
       </SearchHeader>
       <CategoryContainer>
         <CategoryleftBox>
@@ -85,6 +98,11 @@ const Container = styled.div`
   z-index: 2;
 `;
 
+const AlertPostion = styled.div`
+  position: absolute;
+  right: 22px;
+`;
+
 const SearchHeader = styled.div`
   display: flex;
   align-items: center;
@@ -96,7 +114,7 @@ const SearchText = styled.div`
   border-left: 1px solid #aad1ff;
   color: #a9a9a9;
   margin-left: 12px;
-  margin-right: 54px;
+
   padding: 2px 12px;
   vertical-align: middle;
   font-size: 16px;

@@ -7,25 +7,25 @@ import ResetLocation from "./ResetLoctaion";
 import ParkingTicket from "./ParkingTicket";
 import ParkingContainer from "./ParkingContainer";
 import { TicketState } from "../../store/recoil";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import TicketContainer from "./TicketContainer";
 import { ParkingLot } from "../../data";
-
 import TimeFilterContainer from "./TimeFilter";
 
 const MainContainer = () => {
   const { location, error } = useCurrentLocation();
   const nav = useNavigate();
   const mapRef = useRef(null);
+  const { state } = useLocation();
   const [isTicketVisible, setTicketVisible] = useState(TicketState);
   const [selected, setSelected] = useState(null);
   const [selected2, setSelected2] = useState(null);
-
   const [isOpen, setIsOpen] = useState(false);
   const [isDown, setIsDown] = useState("92px");
-
   const [time, setTime] = useState("1시간");
   const [price, setPrice] = useState(6);
+  const [filteredLots, setFilteredLots] = useState(ParkingLot);
+  const [searchText, setSearchText] = useState(state?.query || "");
 
   useEffect(() => {
     if (time === "30분") {
@@ -46,6 +46,17 @@ const MainContainer = () => {
       setIsDown("140px");
     } else setIsDown("92px");
   }, [isOpen]);
+
+  useEffect(() => {
+    if (state && state.query) {
+      const filtered = ParkingLot.filter(
+        (lot) =>
+          lot.place_name.includes(state.query) ||
+          lot.address.includes(state.query)
+      );
+      setFilteredLots(filtered);
+    }
+  }, [state]);
 
   const handlerLocation = () => {
     if (mapRef.current && location) {
@@ -73,17 +84,21 @@ const MainContainer = () => {
 
   const getFilteredLocations = () => {
     if (selected === null) {
-      return ParkingLot;
+      return filteredLots;
     } else if (selected === 1) {
-      return ParkingLot.filter((lot) => lot.price_per_10min === 0);
+      return filteredLots.filter((lot) => lot.price_per_10min === 0);
     } else if (selected === 2) {
-      return ParkingLot.filter((lot) => lot.price_per_10min > 0);
+      return filteredLots.filter((lot) => lot.price_per_10min > 0);
     } else if (selected === 3) {
-      return ParkingLot.filter((lot) => lot.category === "나눔");
+      return filteredLots.filter((lot) => lot.category === "나눔");
     }
-    return ParkingLot;
+    return filteredLots;
   };
 
+  const resetFilter = () => {
+    setSearchText("");
+    setFilteredLots(ParkingLot);
+  };
   if (!location) {
     return <Loading>Loading...</Loading>;
   }
@@ -107,13 +122,15 @@ const MainContainer = () => {
         selected={selected}
         handleClick={handleClick}
         open={setIsOpen}
+        searchText={searchText}
+        resetFilter={resetFilter}
       />
       <TimeFilterContainer
         selected={selected2}
         handleClick={handleClick2}
         isDown={isDown}
         setTime={setTime}
-      ></TimeFilterContainer>
+      />
       <ParkingTicket
         onClick={toggleTicketContainer}
         isTicketVisible={isTicketVisible}

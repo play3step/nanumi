@@ -69,7 +69,6 @@ function PlaceList(props) {
   const funcType = props.funcType;
 
   useEffect(() => {
-    console.log(funcType);
     if (funcType === "normal") {
       setFuncIcon("./sources/img/icons/bin.png");
     }

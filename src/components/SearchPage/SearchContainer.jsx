@@ -136,13 +136,21 @@ const sample = [
   "나눔주차장6",
 ];
 
-function SearchContainer(p) {
+function SearchContainer() {
   const [isOn, setIsOn] = useState(false);
-  const [slideVal, SetslideVal] = useState("0");
+  const [slideVal, setSlideVal] = useState("0");
+  const [query, setQuery] = useState("");
   const nav = useNavigate();
+
   useEffect(() => {
-    isOn ? SetslideVal("60px") : SetslideVal("0");
+    isOn ? setSlideVal("60px") : setSlideVal("0");
   }, [isOn]);
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      nav("/", { state: { query } }); // 검색어를 상태로 전달하여 네비게이션
+    }
+  };
 
   return (
     <Container>
@@ -154,30 +162,26 @@ function SearchContainer(p) {
           onClick={() => nav(-1)}
         />
         <SearchInput
-          onFocus={() => {
-            setIsOn(true);
-          }}
-          onBlur={() => {
-            setIsOn(false);
-          }}
+          onFocus={() => setIsOn(true)}
+          onBlur={() => setIsOn(false)}
           type="text"
           placeholder="목적지/주차장을 입력해주세요."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyPress={handleKeyPress} // 엔터 키 이벤트 처리 추가
         />
       </SearchBar>
 
       {/* 즐겨찾기 부분 */}
-
       <FavoriteTitle>즐겨찾기</FavoriteTitle>
-
       <FavoriteSection>
         <FavoriteBox>
           <FavoriteList>
-            {sample.map((p) => {
-              return <FavoritePlaceItem name={p}></FavoritePlaceItem>;
-            })}
+            {sample.map((p, index) => (
+              <FavoritePlaceItem key={index} name={p} />
+            ))}
           </FavoriteList>
         </FavoriteBox>
-
         <GoFavoritePage>
           <GoFavoriteBtn>
             <img
@@ -190,15 +194,14 @@ function SearchContainer(p) {
       </FavoriteSection>
 
       {/* 최근 검색 기록 부분 */}
-
       <CurrentTitleBox>
         <CurrentTitle>최근 검색 기록</CurrentTitle>
         <CurrentAllDeleteBtn>전체 삭제</CurrentAllDeleteBtn>
       </CurrentTitleBox>
-      <CurrentPlaceList></CurrentPlaceList>
+      <CurrentPlaceList />
 
       <SearchListBox slide={slideVal + "px"}>
-        <SearchPlaceList></SearchPlaceList>
+        <SearchPlaceList />
       </SearchListBox>
     </Container>
   );

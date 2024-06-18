@@ -7,7 +7,6 @@ const ParkingContainer = ({ isTicketVisible, ParkingLot }) => {
   const Info = ParkingLot.find(
     (v) => v.parking_lot_id === isTicketVisible.parkingLotId
   );
-  console.log(isTicketVisible);
   const nav = useNavigate();
   const pageNavHandle = () => {
     nav(`/detail/${isTicketVisible.parkingLotId}`);

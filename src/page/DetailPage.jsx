@@ -6,6 +6,7 @@ import TicketBox from "../components/atom/TicketBox";
 
 const Container = styled.div`
   width: 390px;
+  height: 844px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -13,7 +14,11 @@ const Container = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const ParkingLotImage = styled.div`
   width: 100%;
@@ -588,10 +593,12 @@ function DetailPage(props) {
 
               <TicketContainer>
                 <TicketBox
+                  name={Info.place_name}
                   selected={selectedTicket === 1}
                   onClick={() => handleTicketClick(1)}
                 />
                 <TicketBox
+                  name={Info.place_name}
                   selected={selectedTicket === 2}
                   onClick={() => handleTicketClick(2)}
                 />

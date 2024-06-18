@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-const TicketBox = ({ selected, onClick }) => {
+const TicketBox = ({ name, bg, scale, selected, onClick }) => {
   return (
-    <Container selected={selected} onClick={onClick}>
+    <Container bg={bg} scale={scale} selected={selected} onClick={onClick}>
       <TopBox>
         <TicketState>야간권</TicketState>
         <TicketDate>2024.05.23(오늘)</TicketDate>
       </TopBox>
       <MiddleBox>
-        <PlaceTitle>고양이 주차장</PlaceTitle>
+        <PlaceTitle>{name || "고양이 주차장"}</PlaceTitle>
       </MiddleBox>
       <BottomBox>
         <ValidTime>18:30 ~ 23:30 주차 가능</ValidTime>
@@ -26,10 +26,13 @@ const Container = styled.div`
   border-radius: 8px;
   color: ${({ selected }) => (selected ? "#ffffff" : "#959595")};
   background-color: ${({ selected }) => (selected ? "#3182f7" : "#EDECEC")};
+  background: ${(p) => p.bg};
   padding: 17px 20px;
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: all 0.3s;
+  transform: ${(p) => p.scale};
 `;
 
 const TopBox = styled.div`

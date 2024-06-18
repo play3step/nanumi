@@ -16,6 +16,9 @@ const Container = styled.div`
 `;
 const ListContainer = styled.div`
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   height: 438px;
   background-color: #ffffff;
 `;
@@ -47,8 +50,7 @@ const NameParking = styled.div`
   padding: 20px 16px;
   width: 100%;
 `;
-const MyName = styled.div`
-`;
+const MyName = styled.div``;
 
 const MyNameText = styled.p`
   font-size: 20px;
@@ -137,7 +139,7 @@ const CurrentListImg = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 28px;
-  border-bottom: 8px solid #F0F0F0;
+  border-bottom: 8px solid #f0f0f0;
 `;
 const ChangeProFileImg = styled.img`
   position: absolute;
@@ -160,7 +162,9 @@ function Mypage(props) {
           내 프로필
         </BackTitle>
         <ContentBox>
-        <ChangeProFileImg src={`${process.env.PUBLIC_URL}/icon/imgChange.svg`}/>
+          <ChangeProFileImg
+            src={`${process.env.PUBLIC_URL}/icon/imgChange.svg`}
+          />
           <NameImgBox>
             <MyImgBox>
               <MyImg src="https://i.postimg.cc/jCYfVHcJ/00501111-20190121.jpg" />

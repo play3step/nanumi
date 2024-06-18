@@ -13,10 +13,7 @@ const ParkingContainer = ({ isTicketVisible, ParkingLot }) => {
     nav(`/detail/${isTicketVisible.parkingLotId}`);
   };
   return (
-    <Container
-      isTicketVisible={isTicketVisible.isVisible}
-      onClick={pageNavHandle}
-    >
+    <Container isTicketVisible={isTicketVisible.isVisible}>
       <ParkingInfo info={Info} pageNavHandle={pageNavHandle} />
       <SplitLine />
       <PlaceState info={Info} />
@@ -45,4 +42,5 @@ const SplitLine = styled.div`
   margin-bottom: 12px;
   width: 334px;
   border-bottom: 1px solid #9f9f9f;
+  opacity: 0.5;
 `;

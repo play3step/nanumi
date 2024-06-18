@@ -11,12 +11,15 @@ const CategoryBtn = ({ text, selected, onClick }) => {
 export default CategoryBtn;
 
 const Category = styled.button`
-  min-width: 54px;
-  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 6px 14px;
   border: 1px solid;
   border-radius: 20px;
-  padding: 6px 14px;
   font-size: 14px;
   color: ${({ selected }) => (selected ? "#ffffff" : "#959595")};
   background-color: ${({ selected }) => (selected ? "#3182f7" : "#EDECEC")};
+  border: none;
 `;

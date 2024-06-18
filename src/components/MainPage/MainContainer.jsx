@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useCurrentLocation from "../../hooks/useCurrentLocation";
 import Map from "./Map";
@@ -11,12 +11,41 @@ import { useNavigate } from "react-router-dom";
 import TicketContainer from "./TicketContainer";
 import { ParkingLot } from "../../data";
 
+import TimeFilterContainer from "./TimeFilter";
+
 const MainContainer = () => {
   const { location, error } = useCurrentLocation();
   const nav = useNavigate();
   const mapRef = useRef(null);
   const [isTicketVisible, setTicketVisible] = useState(TicketState);
   const [selected, setSelected] = useState(null);
+  const [selected2, setSelected2] = useState(null);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDown, setIsDown] = useState("92px");
+
+  const [time, setTime] = useState("1시간");
+  const [price, setPrice] = useState(6);
+
+  useEffect(() => {
+    if (time === "30분") {
+      setPrice(3);
+    } else if (time === "1시간") {
+      setPrice(6);
+    } else if (time === "2시간") {
+      setPrice(12);
+    } else if (time === "3시간") {
+      setPrice(18);
+    } else if (time === "4시간") {
+      setPrice(24);
+    }
+  }, [time]);
+
+  useEffect(() => {
+    if (isOpen === true) {
+      setIsDown("140px");
+    } else setIsDown("92px");
+  }, [isOpen]);
 
   const handlerLocation = () => {
     if (mapRef.current && location) {
@@ -36,6 +65,10 @@ const MainContainer = () => {
 
   const handleClick = (select) => {
     setSelected((prev) => (prev === select ? null : select));
+  };
+
+  const handleClick2 = (select) => {
+    setSelected2((prev) => (prev === select ? null : select));
   };
 
   const getFilteredLocations = () => {
@@ -66,12 +99,21 @@ const MainContainer = () => {
         location={location}
         locations={getFilteredLocations()}
         setTicketVisible={setTicketVisible}
+        time={time}
+        price={price}
       />
       <SearchContainer
         nav={nav}
         selected={selected}
         handleClick={handleClick}
+        open={setIsOpen}
       />
+      <TimeFilterContainer
+        selected={selected2}
+        handleClick={handleClick2}
+        isDown={isDown}
+        setTime={setTime}
+      ></TimeFilterContainer>
       <ParkingTicket
         onClick={toggleTicketContainer}
         isTicketVisible={isTicketVisible}

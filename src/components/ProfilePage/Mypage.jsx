@@ -23,6 +23,7 @@ const ContentBox = styled.div`
   width: 321px;
   margin-right: auto;
   margin-left: auto;
+  position: relative;
 `;
 const BackTitle = styled.div`
   padding: 20px 20px;
@@ -30,10 +31,11 @@ const BackTitle = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-bottom: 10px;
 `;
 const NameImgBox = styled.div`
   display: flex;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 `;
 const MyImgBox = styled.div``;
 const MyImg = styled.img`
@@ -42,10 +44,11 @@ const MyImg = styled.img`
   border-radius: 80px;
 `;
 const NameParking = styled.div`
-  padding-left: 16px;
+  padding: 20px 16px;
   width: 100%;
 `;
-const MyName = styled.div``;
+const MyName = styled.div`
+`;
 
 const MyNameText = styled.p`
   font-size: 20px;
@@ -122,7 +125,7 @@ const PastListText = styled.p`
 `;
 const PastListBox = styled.div`
   background-color: #ffffff;
-  padding: 2px 0px;
+  padding: 16px 0px;
   border-bottom: 1px solid #c3c3c3;
 `;
 const ListDate = styled.p`
@@ -133,8 +136,15 @@ const ListDate = styled.p`
 const CurrentListImg = styled.div`
   display: flex;
   justify-content: center;
-  padding-bottom: 10px;
+  padding-bottom: 28px;
+  border-bottom: 8px solid #F0F0F0;
 `;
+const ChangeProFileImg = styled.img`
+  position: absolute;
+  top: 30%;
+  left: 21%;
+`;
+
 function Mypage(props) {
   // const {datas} = props;
   const nav = useNavigate();
@@ -147,9 +157,10 @@ function Mypage(props) {
             alt="사진"
             onClick={() => nav(-1)}
           />
-          내프로필
+          내 프로필
         </BackTitle>
         <ContentBox>
+        <ChangeProFileImg src={`${process.env.PUBLIC_URL}/icon/imgChange.svg`}/>
           <NameImgBox>
             <MyImgBox>
               <MyImg src="https://i.postimg.cc/jCYfVHcJ/00501111-20190121.jpg" />
@@ -184,10 +195,6 @@ function Mypage(props) {
           <PastListText>과거 이용 내역 확인</PastListText>
         </PastListBox>
         <ListContainer>
-          {/* {posts.map((data, index)=>{
-                    return(
-                <ParkingTicketList key={data.id} post={data} onClick={()=>onClickItem(data)}></ParkingTicketList>
-                )})} */}
           <ContentBox>
             <ListDate>2024.05.23</ListDate>
             <ParkingTicketList />

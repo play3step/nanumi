@@ -131,9 +131,7 @@ const TicketContainer = styled.div`
 const BuyButton = styled.div`
   width: 342px;
   height: 50px;
-
-  background-color: ${({ selected }) => (selected ? "#2c4064" : "#EDECEC")};
-
+  background-color: ${({ selected }) => (selected ? "#2c4064" : "#d0d0d0")};
   border-radius: 4px;
   display: flex;
   justify-content: center;
@@ -175,7 +173,6 @@ const VisitorDate = styled.div`
 const VisitorSubTitle = styled.div`
   width: 100%;
   font-size: 12px;
-  margin-bottom: 20px;
   text-align: left;
   color: #9e9e9e;
 `;
@@ -190,10 +187,21 @@ const WeekList = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 10px;
   margin-bottom: 16px;
+  gap: 12px;
   justify-content: center;
 `;
+const Week = styled.div`
+  width: 34px;
+  height: 34px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 14px;
+  border-radius: 50px;
+  color: ${({ selected }) => (selected ? "#ffffff" : "#000000")};
+  background-color: ${({ selected }) => (selected ? "#3182f7" : "#ffffff")};
+`;
+
 const BackTitle = styled.div`
   z-index: 999;
   position: absolute;
@@ -218,24 +226,45 @@ const DetailInfo = [
   },
 ];
 
+const weekImages = {
+  1: `${process.env.PUBLIC_URL}/VistorDataGraph/Mon.png`,
+  2: `${process.env.PUBLIC_URL}/VistorDataGraph/Tue.png`,
+  3: `${process.env.PUBLIC_URL}/VistorDataGraph/Wed.png`,
+  4: `${process.env.PUBLIC_URL}/VistorDataGraph/Thu.png`,
+  5: `${process.env.PUBLIC_URL}/VistorDataGraph/Fri.png`,
+  6: `${process.env.PUBLIC_URL}/VistorDataGraph/Sat.png`,
+  7: `${process.env.PUBLIC_URL}/VistorDataGraph/Sun.png`,
+};
+
+const weekDate = {
+  1: `2024.05.12`,
+  2: `2024.05.13`,
+  3: `2024.05.14`,
+  4: `2024.05.15`,
+  5: `2024.05.16`,
+  6: `2024.05.17`,
+  7: `2024.05.18`,
+};
+
 function DetailPage(props) {
   const nav = useNavigate();
   const params = useParams();
   const Info = ParkingLot.find((v) => v.parking_lot_id === parseInt(params.id));
   const [selectedTicket, setSelectedTicket] = useState(null);
-  const [selectedDay, setSelectedDay] = useState("월");
-
   const handleTicketClick = (ticketId) => {
     setSelectedTicket(ticketId);
+  };
+
+  const [selectedWeek, setselectedWeek] = useState(1);
+  const selectedWeekClick = (WeekId) => {
+    setselectedWeek(WeekId);
   };
 
   if (!Info) {
     return <div>해당 주차장을 찾을 수 없습니다.</div>;
   }
-  const handleDayClick = (day) => {
-    setSelectedDay(day);
-  };
-  console.log(Info);
+  // console.log(Info);
+
   return (
     <div>
       {DetailInfo.map(function (props) {
@@ -332,44 +361,63 @@ function DetailPage(props) {
                   selected={selectedTicket === 2}
                   onClick={() => handleTicketClick(2)}
                 />
-                <BuyButton selected={selectedTicket}>주차권 구매</BuyButton>
+                <BuyButton selected={selectedTicket !== null}>
+                  주차권 구매
+                </BuyButton>
               </TicketContainer>
 
               <VisitorData>
                 <VisitorTitleBox>
                   <VisitorTitle>방문자 데이터</VisitorTitle>
-                  <VisitorDate>2024.05.25</VisitorDate>
+                  <VisitorDate>{weekDate[selectedWeek]}</VisitorDate>
                 </VisitorTitleBox>
                 <VisitorSubTitle>시간별 인기도</VisitorSubTitle>
                 <ImgData>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/VistorDataGraph.png`}
-                    alt="사진"
-                  />
+                  <img src={weekImages[selectedWeek]} alt="사진" />
                 </ImgData>
                 <WeekList>
-                  {["월", "화", "수", "목", "금", "토", "일"].map((day) => (
-                    <div
-                      key={day}
-                      onClick={() => handleDayClick(day)}
-                      style={{
-                        width: "34px",
-                        height: "34px",
-                        lineHeight: "30px",
-                        fontSize: "14px",
-                        borderRadius: "50px",
-                        cursor: "pointer",
-                        backgroundColor:
-                          selectedDay === day ? "#3182f7" : "#ffffff",
-                        color: selectedDay === day ? "#ffffff" : "#000000",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {day}
-                    </div>
-                  ))}
+                  <Week
+                    selected={selectedWeek === 1}
+                    onClick={() => selectedWeekClick(1)}
+                  >
+                    월
+                  </Week>
+                  <Week
+                    selected={selectedWeek === 2}
+                    onClick={() => selectedWeekClick(2)}
+                  >
+                    화
+                  </Week>
+                  <Week
+                    selected={selectedWeek === 3}
+                    onClick={() => selectedWeekClick(3)}
+                  >
+                    수
+                  </Week>
+                  <Week
+                    selected={selectedWeek === 4}
+                    onClick={() => selectedWeekClick(4)}
+                  >
+                    목
+                  </Week>
+                  <Week
+                    selected={selectedWeek === 5}
+                    onClick={() => selectedWeekClick(5)}
+                  >
+                    금
+                  </Week>
+                  <Week
+                    selected={selectedWeek === 6}
+                    onClick={() => selectedWeekClick(6)}
+                  >
+                    토
+                  </Week>
+                  <Week
+                    selected={selectedWeek === 7}
+                    onClick={() => selectedWeekClick(7)}
+                  >
+                    일
+                  </Week>
                 </WeekList>
               </VisitorData>
             </DetailContainer>

@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import FavoritePlaceItem from "./FavoritePlaceItem";
 import CurrentPlaceList from "./CurrentPlaceList";
@@ -33,8 +33,6 @@ const SearchInput = styled.input`
   background: white;
   outline: none;
 `;
-
-///////////////////////////////////////////////////////////////////////////////
 
 const FavoriteTitle = styled.h1`
   font-size: 12px;
@@ -87,8 +85,6 @@ const GoFavoriteBtn = styled.div`
   align-items: center;
 `;
 
-/////////////////////////////////////////////////////////////////////////////////////////
-
 const CurrentTitleBox = styled.div`
   width: 100%;
   display: flex;
@@ -125,8 +121,6 @@ const SearchListBox = styled.div`
   transform: translateY(calc(100vh - ${(p) => p.slide}));
 `;
 
-/////////// 파이어베이스 연결시 아래 array 삭제
-
 const sample = [
   "나눔주차장1",
   "나눔주차장2",
@@ -152,14 +146,13 @@ function SearchContainer() {
     }
   };
 
-  const handlePlaceClick = (placeName) => {
+  const handlePlaceClick = (placeName, location) => {
     setQuery(placeName);
-    nav("/", { state: { query: placeName } });
+    nav("/", { state: { query: placeName, location } });
   };
 
   return (
     <Container>
-      {/* 검색 부분 */}
       <SearchBar>
         <img
           src="./sources/img/icons/backBtn.png"
@@ -172,17 +165,25 @@ function SearchContainer() {
           placeholder="목적지/주차장을 입력해주세요."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onKeyPress={handleKeyPress} // 엔터 키 이벤트 처리 추가
+          onKeyPress={handleKeyPress}
         />
       </SearchBar>
 
-      {/* 즐겨찾기 부분 */}
       <FavoriteTitle>즐겨찾기</FavoriteTitle>
       <FavoriteSection>
         <FavoriteBox>
           <FavoriteList>
             {sample.map((p, index) => (
-              <FavoritePlaceItem key={index} name={p} />
+              <FavoritePlaceItem
+                key={index}
+                name={p}
+                onClick={() =>
+                  handlePlaceClick(p, {
+                    latitude: 35.3463685,
+                    longitude: 128.7340116,
+                  })
+                }
+              />
             ))}
           </FavoriteList>
         </FavoriteBox>
@@ -197,7 +198,6 @@ function SearchContainer() {
         </GoFavoritePage>
       </FavoriteSection>
 
-      {/* 최근 검색 기록 부분 */}
       <CurrentTitleBox>
         <CurrentTitle>최근 검색 기록</CurrentTitle>
         <CurrentAllDeleteBtn>전체 삭제</CurrentAllDeleteBtn>

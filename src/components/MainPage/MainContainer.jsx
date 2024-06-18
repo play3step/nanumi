@@ -100,6 +100,21 @@ const MainContainer = () => {
     setFilteredLots(ParkingLot);
     nav({ state: { query: "" } });
   };
+  const setTicketLocation = () => {
+    const targetLot = ParkingLot.find((lot) => lot.parking_lot_id === 8);
+    if (targetLot && mapRef.current) {
+      mapRef.current.setCenter(
+        new window.naver.maps.LatLng(
+          targetLot.location.latitude,
+          targetLot.location.longitude
+        )
+      );
+      setSearchText("고양이 주차장");
+
+      setFilteredLots([targetLot]);
+    }
+  };
+
   if (!location) {
     return <Loading>Loading...</Loading>;
   }
@@ -142,7 +157,10 @@ const MainContainer = () => {
           ParkingLot={ParkingLot}
         />
       ) : (
-        <TicketContainer isTicketVisible={isTicketVisible} />
+        <TicketContainer
+          isTicketVisible={isTicketVisible}
+          onClick={setTicketLocation}
+        />
       )}
       <ResetLocation
         handlerLocation={handlerLocation}

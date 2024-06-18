@@ -29,7 +29,7 @@ function SearchPlaceList({ query, onPlaceClick }) {
           name={p.place_name}
           address={p.address}
           funcType={funcType}
-          onMouseDown={() => onPlaceClick(p.place_name)}
+          onMouseDown={() => onPlaceClick(p.place_name, p.location)}
         />
       ))}
     </ListBox>

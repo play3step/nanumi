@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TicketBox from "../atom/TicketBox";
 
-const TicketContainer = ({ isTicketVisible }) => {
+const TicketContainer = ({ isTicketVisible, onClick }) => {
   return (
     <Container isTicketVisible={isTicketVisible.isVisible}>
       <div
@@ -10,11 +10,11 @@ const TicketContainer = ({ isTicketVisible }) => {
           marginBottom: "24px",
         }}
       >
-        <TicketText>시흥시 공영 주차장</TicketText>
+        <TicketText>시흥시 공영주차장</TicketText>
         <SplitLine />
         <ParkingType>공영주차장</ParkingType>
       </div>
-      <TicketBox selected="true" />
+      <TicketBox selected="true" onClick={onClick} />
     </Container>
   );
 };

@@ -8,7 +8,7 @@ const TicketBox = ({ selected, onClick }) => {
         <TicketDate>2024.05.23(오늘)</TicketDate>
       </TopBox>
       <MiddleBox>
-        <PlaceTitle>시흥시 공영주차장</PlaceTitle>
+        <PlaceTitle>고양이 주차장</PlaceTitle>
       </MiddleBox>
       <BottomBox>
         <ValidTime>18:30 ~ 23:30 주차 가능</ValidTime>

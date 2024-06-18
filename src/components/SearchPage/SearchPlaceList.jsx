@@ -12,7 +12,7 @@ const ListBox = styled.div`
   padding-bottom: 120px;
 `;
 
-function SearchPlaceList({ query }) {
+function SearchPlaceList({ query, onPlaceClick }) {
   const funcType = "normal";
 
   const filteredList = ParkingLot.filter((place) =>
@@ -29,6 +29,7 @@ function SearchPlaceList({ query }) {
           name={p.place_name}
           address={p.address}
           funcType={funcType}
+          onMouseDown={() => onPlaceClick(p.place_name)}
         />
       ))}
     </ListBox>

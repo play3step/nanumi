@@ -80,7 +80,7 @@ function PlaceList(props) {
   }, [props.funcType]);
 
   return (
-    <BoxPlace id={props.id}>
+    <BoxPlace id={props.id} onClick={props.onMouseDown}>
       <PlaceInfo>
         <BoxPlaceName>
           <ImgPlaceType>

@@ -152,6 +152,11 @@ function SearchContainer() {
     }
   };
 
+  const handlePlaceClick = (placeName) => {
+    setQuery(placeName);
+    nav("/", { state: { query: placeName } });
+  };
+
   return (
     <Container>
       {/* 검색 부분 */}
@@ -163,7 +168,6 @@ function SearchContainer() {
         />
         <SearchInput
           onFocus={() => setIsOn(true)}
-          onBlur={() => setIsOn(false)}
           type="text"
           placeholder="목적지/주차장을 입력해주세요."
           value={query}
@@ -201,7 +205,7 @@ function SearchContainer() {
       <CurrentPlaceList />
 
       <SearchListBox slide={slideVal + "px"}>
-        <SearchPlaceList query={query} />
+        <SearchPlaceList query={query} onPlaceClick={handlePlaceClick} />
       </SearchListBox>
     </Container>
   );

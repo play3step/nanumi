@@ -98,6 +98,7 @@ const MainContainer = () => {
   const resetFilter = () => {
     setSearchText("");
     setFilteredLots(ParkingLot);
+    nav({ state: { query: "" } });
   };
   if (!location) {
     return <Loading>Loading...</Loading>;
